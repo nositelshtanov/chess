@@ -95,6 +95,7 @@ const shahsObj = {
     _refreshWhiteShahs: function() {
         const whiteFigures = ['17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32'];
         const blackFigures = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16'];
+        const blackFiguresWithNull = ['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16'];
         const figuresElements = document.body.querySelector('.board').querySelectorAll('.white-team');
 
         const figures = [];
@@ -126,13 +127,13 @@ const shahsObj = {
                         const cell = shahsMap[i - 1][j - 1];
 
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metka;
+                            if (parseInt(cell) == k) break metka;
                         }
 
                         shahsMap[i - 1][j - 1] = shahsMap[i - 1][j - 1] + 'w';
                         
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metka;
+                            if (parseInt(cell) == k) break metka;
                         }
                     }
 
@@ -140,13 +141,13 @@ const shahsObj = {
                         const cell = shahsMap[i - 1][j - 1];
 
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metka1;
+                            if (parseInt(cell) == k) break metka1;
                         }
 
                         shahsMap[i - 1][j - 1] = shahsMap[i - 1][j - 1] + 'w';
                         
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metka1;
+                            if (parseInt(cell) == k) break metka1;
                         }
                     }
 
@@ -154,13 +155,13 @@ const shahsObj = {
                         const cell = shahsMap[j - 1][i - 1];
 
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metka2;
+                            if (parseInt(cell) == k) break metka2;
                         }
 
                         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
                         
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metka2;
+                            if (parseInt(cell) == k) break metka2;
                         }
                     }
 
@@ -168,13 +169,13 @@ const shahsObj = {
                         const cell = shahsMap[j - 1][i - 1];
 
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metka3;
+                            if (parseInt(cell) == k) break metka3;
                         }
 
                         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
                         
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metka3;
+                            if (parseInt(cell) == k) break metka3;
                         }
                     }
                 break;
@@ -185,7 +186,7 @@ const shahsObj = {
                     if (shahsMap[figure2.y - 1 + 2]?.[figure2.x - 1 - 1] != undefined) {
                         let yslovie = false;
                         for (let k of figures) {
-                            if (!shahsMap[figure2.y - 1 + 2][figure2.x - 1 - 1].includes(k)) {
+                            if (!parseInt([figure2.y - 1 + 2][figure2.x - 1 - 1]) == k) {
                                 yslovie = true;
                             } else {
                                 yslovie = false;
@@ -200,7 +201,7 @@ const shahsObj = {
                     if (shahsMap[figure2.y - 1 + 2]?.[figure2.x - 1 + 1] != undefined) {
                         let yslovie = false;
                         for (let k of figures) {
-                            if (!shahsMap[figure2.y - 1 + 2][figure2.x - 1 + 1].includes(k)) {
+                            if (!parseInt([figure2.y - 1 + 2][figure2.x - 1 + 1]) == k) {
                                 yslovie = true;
                             } else {
                                 yslovie = false;
@@ -215,7 +216,7 @@ const shahsObj = {
                     if (shahsMap[figure2.y - 1 - 2]?.[figure2.x - 1 - 1] != undefined) {
                         let yslovie = false;
                         for (let k of figures) {
-                            if (!shahsMap[figure2.y - 1 - 2][figure2.x - 1 - 1].includes(k)) {
+                            if (!parseInt([figure2.y - 1 - 2][figure2.x - 1 - 1]) == k) {
                                 yslovie = true;
                             } else {
                                 yslovie = false;
@@ -230,7 +231,7 @@ const shahsObj = {
                     if (shahsMap[figure2.y - 1 - 2]?.[figure2.x - 1 + 1] != undefined) {
                         let yslovie = false;
                         for (let k of figures) {
-                            if (!shahsMap[figure2.y - 1 - 2][figure2.x - 1 + 1].includes(k)) {
+                            if (!parseInt([figure2.y - 1 - 2][figure2.x - 1 + 1]) == k) {
                                 yslovie = true;
                             } else {
                                 yslovie = false;
@@ -245,7 +246,7 @@ const shahsObj = {
                     if (shahsMap[figure2.y - 1 + 1]?.[figure2.x - 1 - 2] != undefined) {
                         let yslovie = false;
                         for (let k of figures) {
-                            if (!shahsMap[figure2.y - 1 + 1][figure2.x - 1 - 2].includes(k)) {
+                            if (!parseInt([figure2.y - 1 + 1][figure2.x - 1 - 2]) == k) {
                                 yslovie = true;
                             } else {
                                 yslovie = false;
@@ -260,7 +261,7 @@ const shahsObj = {
                     if (shahsMap[figure2.y - 1 + 1]?.[figure2.x - 1 + 2] != undefined) {
                         let yslovie = false;
                         for (let k of figures) {
-                            if (!shahsMap[figure2.y - 1 + 1][figure2.x - 1 + 2].includes(k)) {
+                            if (!parseInt([figure2.y - 1 + 1][figure2.x - 1 + 2]) == k) {
                                 yslovie = true;
                             } else {
                                 yslovie = false;
@@ -275,7 +276,7 @@ const shahsObj = {
                     if (shahsMap[figure2.y - 1 - 1]?.[figure2.x - 1 - 2] != undefined) {
                         let yslovie = false;
                         for (let k of figures) {
-                            if (!shahsMap[figure2.y - 1 - 1][figure2.x - 1 - 2].includes(k)) {
+                            if (!parseInt([figure2.y - 1 - 1][figure2.x - 1 - 2]) == k) {
                                 yslovie = true;
                             } else {
                                 yslovie = false;
@@ -290,7 +291,7 @@ const shahsObj = {
                     if (shahsMap[figure2.y - 1 - 1]?.[figure2.x - 1 + 2] != undefined) {
                         let yslovie = false;
                         for (let k of figures) {
-                            if (!shahsMap[figure2.y - 1 - 1][figure2.x - 1 + 2].includes(k)) {
+                            if (!parseInt([figure2.y - 1 - 1][figure2.x - 1 + 2]) == k) {
                                 yslovie = true;
                             } else {
                                 yslovie = false;
@@ -311,13 +312,13 @@ const shahsObj = {
                         const cell = shahsMap[j - 1][i - 1]; 
 
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metka4;
+                            if (parseInt(cell) == k) break metka4;
                         }
 
                         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
                         
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metka4;
+                            if (parseInt(cell) == k) break metka4;
                         }
                     }
 
@@ -325,13 +326,13 @@ const shahsObj = {
                         const cell = shahsMap[j - 1][i - 1]; 
 
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metka5;
+                            if (parseInt(cell) == k) break metka5;
                         }
 
                         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
                         
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metka5;
+                            if (parseInt(cell) == k) break metka5;
                         }
                     }
 
@@ -339,13 +340,13 @@ const shahsObj = {
                         const cell = shahsMap[j - 1][i - 1]; 
 
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metka6;
+                            if (parseInt(cell) == k) break metka6;
                         }
 
                         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
                         
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metka6;
+                            if (parseInt(cell) == k) break metka6;
                         }
                     }
 
@@ -353,13 +354,13 @@ const shahsObj = {
                         const cell = shahsMap[j - 1][i - 1]; 
 
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metka7;
+                            if (parseInt(cell) == k) break metka7;
                         }
 
                         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
                         
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metka7;
+                            if (parseInt(cell) == k) break metka7;
                         }
                     }
                 break;
@@ -370,13 +371,13 @@ const shahsObj = {
                         const cell = shahsMap[i - 1][j - 1];
 
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metka8;
+                            if (parseInt(cell) == k) break metka8;
                         }
 
                         shahsMap[i - 1][j - 1] = shahsMap[i - 1][j - 1] + 'w';
                         
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metka8;
+                            if (parseInt(cell) == k) break metka8;
                         }
                     }
 
@@ -384,13 +385,13 @@ const shahsObj = {
                         const cell = shahsMap[i - 1][j - 1];
 
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metka9;
+                            if (parseInt(cell) == k) break metka9;
                         }
 
                         shahsMap[i - 1][j - 1] = shahsMap[i - 1][j - 1] + 'w';
                         
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metka9;
+                            if (parseInt(cell) == k) break metka9;
                         }
                     }
 
@@ -398,13 +399,13 @@ const shahsObj = {
                         const cell = shahsMap[j - 1][i - 1];
 
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metka10;
+                            if (parseInt(cell) == k) break metka10;
                         }
 
                         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
                         
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metka10;
+                            if (parseInt(cell) == k) break metka10;
                         }
                     }
 
@@ -412,13 +413,13 @@ const shahsObj = {
                         const cell = shahsMap[j - 1][i - 1];
 
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metka11;
+                            if (parseInt(cell) == k) break metka11;
                         }
 
                         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
                         
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metka11;
+                            if (parseInt(cell) == k) break metka11;
                         }
                     }
 
@@ -427,13 +428,13 @@ const shahsObj = {
                         const cell = shahsMap[j - 1][i - 1]; 
 
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metk;
+                            if (parseInt(cell) == k) break metk;
                         }
 
                         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
                         
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metk;
+                            if (parseInt(cell) == k) break metk;
                         }
                     }
 
@@ -441,13 +442,13 @@ const shahsObj = {
                         const cell = shahsMap[j - 1][i - 1]; 
 
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metk1;
+                            if (parseInt(cell) == k) break metk1;
                         }
 
                         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
                         
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metk1;
+                            if (parseInt(cell) == k) break metk1;
                         }
                     }
 
@@ -455,13 +456,13 @@ const shahsObj = {
                         const cell = shahsMap[j - 1][i - 1]; 
 
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metk2;
+                            if (parseInt(cell) == k) break metk2;
                         }
 
                         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
                         
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metk2;
+                            if (parseInt(cell) == k) break metk2;
                         }
                     }
 
@@ -469,13 +470,13 @@ const shahsObj = {
                         const cell = shahsMap[j - 1][i - 1]; 
 
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metk3;
+                            if (parseInt(cell) == k) break metk3;
                         }
 
                         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
                         
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metk3;
+                            if (parseInt(cell) == k) break metk3;
                         }
                     }
                 break;
@@ -486,7 +487,7 @@ const shahsObj = {
                         const cell = shahsMap[figure5.y - 1 + 1][figure5.x - 1 - 1];
                         let ysl = false;
                         for (let k of whiteFigures) {
-                            if (!cell.includes(k)) {
+                            if (!parseInt(cell) == k) {
                                 ysl = true;
                             } else {
                                 ysl = false;
@@ -502,7 +503,7 @@ const shahsObj = {
                         const cell = shahsMap[figure5.y - 1 + 1][figure5.x - 1];
                         let ysl = false;
                         for (let k of whiteFigures) {
-                            if (!cell.includes(k)) {
+                            if (!parseInt(cell) == k) {
                                 ysl = true;
                             } else {
                                 ysl = false;
@@ -518,7 +519,7 @@ const shahsObj = {
                         const cell = shahsMap[figure5.y - 1 + 1][figure5.x - 1 + 1];
                         let ysl = false;
                         for (let k of whiteFigures) {
-                            if (!cell.includes(k)) {
+                            if (!parseInt(cell) == k) {
                                 ysl = true;
                             } else {
                                 ysl = false;
@@ -535,7 +536,7 @@ const shahsObj = {
                         const cell = shahsMap[figure5.y - 1][figure5.x - 1 + 1];
                         let ysl = false;
                         for (let k of whiteFigures) {
-                            if (!cell.includes(k)) {
+                            if (!parseInt(cell) == k) {
                                 ysl = true;
                             } else {
                                 ysl = false;
@@ -551,7 +552,7 @@ const shahsObj = {
                         const cell = shahsMap[figure5.y - 1][figure5.x - 1 - 1];
                         let ysl = false;
                         for (let k of whiteFigures) {
-                            if (!cell.includes(k)) {
+                            if (!parseInt(cell) == k) {
                                 ysl = true;
                             } else {
                                 ysl = false;
@@ -568,7 +569,7 @@ const shahsObj = {
                         const cell = shahsMap[figure5.y - 1 - 1][figure5.x - 1 - 1];
                         let ysl = false;
                         for (let k of whiteFigures) {
-                            if (!cell.includes(k)) {
+                            if (!parseInt(cell) == k) {
                                 ysl = true;
                             } else {
                                 ysl = false;
@@ -584,7 +585,7 @@ const shahsObj = {
                         const cell = shahsMap[figure5.y - 1 - 1][figure5.x - 1];
                         let ysl = false;
                         for (let k of whiteFigures) {
-                            if (!cell.includes(k)) {
+                            if (!parseInt(cell) == k) {
                                 ysl = true;
                             } else {
                                 ysl = false;
@@ -600,7 +601,7 @@ const shahsObj = {
                         const cell = shahsMap[figure5.y - 1 - 1][figure5.x - 1 + 1];
                         let ysl = false;
                         for (let k of whiteFigures) {
-                            if (!cell.includes(k)) {
+                            if (!parseInt(cell) == k) {
                                 ysl = true;
                             } else {
                                 ysl = false;
@@ -619,6 +620,7 @@ const shahsObj = {
     _refreshBlackShahs: function() {
         const whiteFigures = ['17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32'];
         const blackFigures = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16'];
+        const blackFiguresWithNull = ['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16'];
         const figuresElements = document.body.querySelector('.board').querySelectorAll('.black-team');
 
         const figures = [];
@@ -650,13 +652,13 @@ const shahsObj = {
                         const cell = shahsMap[i - 1][j - 1];
 
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metka;
+                            if (parseInt(cell) == k) break metka;
                         }
 
                         shahsMap[i - 1][j - 1] = shahsMap[i - 1][j - 1] + 'b';
                         
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metka;
+                            if (parseInt(cell) == k) break metka;
                         }
                     }
 
@@ -664,13 +666,13 @@ const shahsObj = {
                         const cell = shahsMap[i - 1][j - 1];
 
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metka1;
+                            if (parseInt(cell) == k) break metka1;
                         }
 
                         shahsMap[i - 1][j - 1] = shahsMap[i - 1][j - 1] + 'b';
                         
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metka1;
+                            if (parseInt(cell) == k) break metka1;
                         }
                     }
 
@@ -678,13 +680,13 @@ const shahsObj = {
                         const cell = shahsMap[j - 1][i - 1];
 
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metka2;
+                            if (parseInt(cell) == k) break metka2;
                         }
 
                         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'b';
                         
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metka2;
+                            if (parseInt(cell) == k) break metka2;
                         }
                     }
 
@@ -692,13 +694,13 @@ const shahsObj = {
                         const cell = shahsMap[j - 1][i - 1];
 
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metka3;
+                            if (parseInt(cell) == k) break metka3;
                         }
 
                         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'b';
                         
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metka3;
+                            if (parseInt(cell) == k) break metka3;
                         }
                     }
                 break;
@@ -709,7 +711,7 @@ const shahsObj = {
                     if (shahsMap[figure2.y - 1 + 2]?.[figure2.x - 1 - 1] != undefined) {
                         let yslovie = false;
                         for (let k of figures) {
-                            if (!shahsMap[figure2.y - 1 + 2][figure2.x - 1 - 1].includes(k)) {
+                            if (!parseInt([figure2.y - 1 + 2][figure2.x - 1 - 1]) == k) {
                                 yslovie = true;
                             } else {
                                 yslovie = false;
@@ -724,7 +726,7 @@ const shahsObj = {
                     if (shahsMap[figure2.y - 1 + 2]?.[figure2.x - 1 + 1] != undefined) {
                         let yslovie = false;
                         for (let k of figures) {
-                            if (!shahsMap[figure2.y - 1 + 2][figure2.x - 1 + 1].includes(k)) {
+                            if (!parseInt([figure2.y - 1 + 2][figure2.x - 1 + 1]) == k) {
                                 yslovie = true;
                             } else {
                                 yslovie = false;
@@ -739,7 +741,7 @@ const shahsObj = {
                     if (shahsMap[figure2.y - 1 - 2]?.[figure2.x - 1 - 1] != undefined) {
                         let yslovie = false;
                         for (let k of figures) {
-                            if (!shahsMap[figure2.y - 1 - 2][figure2.x - 1 - 1].includes(k)) {
+                            if (!parseInt([figure2.y - 1 - 2][figure2.x - 1 - 1]) == k) {
                                 yslovie = true;
                             } else {
                                 yslovie = false;
@@ -754,7 +756,7 @@ const shahsObj = {
                     if (shahsMap[figure2.y - 1 - 2]?.[figure2.x - 1 + 1] != undefined) {
                         let yslovie = false;
                         for (let k of figures) {
-                            if (!shahsMap[figure2.y - 1 - 2][figure2.x - 1 + 1].includes(k)) {
+                            if (!parseInt([figure2.y - 1 - 2][figure2.x - 1 + 1]) == k) {
                                 yslovie = true;
                             } else {
                                 yslovie = false;
@@ -769,7 +771,7 @@ const shahsObj = {
                     if (shahsMap[figure2.y - 1 + 1]?.[figure2.x - 1 - 2] != undefined) {
                         let yslovie = false;
                         for (let k of figures) {
-                            if (!shahsMap[figure2.y - 1 + 1][figure2.x - 1 - 2].includes(k)) {
+                            if (!parseInt([figure2.y - 1 + 1][figure2.x - 1 - 2]) == k) {
                                 yslovie = true;
                             } else {
                                 yslovie = false;
@@ -784,7 +786,7 @@ const shahsObj = {
                     if (shahsMap[figure2.y - 1 + 1]?.[figure2.x - 1 + 2] != undefined) {
                         let yslovie = false;
                         for (let k of figures) {
-                            if (!shahsMap[figure2.y - 1 + 1][figure2.x - 1 + 2].includes(k)) {
+                            if (!parseInt([figure2.y - 1 + 1][figure2.x - 1 + 2]) == k) {
                                 yslovie = true;
                             } else {
                                 yslovie = false;
@@ -799,7 +801,7 @@ const shahsObj = {
                     if (shahsMap[figure2.y - 1 - 1]?.[figure2.x - 1 - 2] != undefined) {
                         let yslovie = false;
                         for (let k of figures) {
-                            if (!shahsMap[figure2.y - 1 - 1][figure2.x - 1 - 2].includes(k)) {
+                            if (!parseInt([figure2.y - 1 - 1][figure2.x - 1 - 2]) == k) {
                                 yslovie = true;
                             } else {
                                 yslovie = false;
@@ -814,7 +816,7 @@ const shahsObj = {
                     if (shahsMap[figure2.y - 1 - 1]?.[figure2.x - 1 + 2] != undefined) {
                         let yslovie = false;
                         for (let k of figures) {
-                            if (!shahsMap[figure2.y - 1 - 1][figure2.x - 1 + 2].includes(k)) {
+                            if (!parseInt([figure2.y - 1 - 1][figure2.x - 1 + 2]) == k) {
                                 yslovie = true;
                             } else {
                                 yslovie = false;
@@ -835,13 +837,13 @@ const shahsObj = {
                         const cell = shahsMap[j - 1][i - 1]; 
 
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metka4;
+                            if (parseInt(cell) == k) break metka4;
                         }
 
                         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'b';
                         
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metka4;
+                            if (parseInt(cell) == k) break metka4;
                         }
                     }
 
@@ -849,13 +851,13 @@ const shahsObj = {
                         const cell = shahsMap[j - 1][i - 1]; 
 
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metka5;
+                            if (parseInt(cell) == k) break metka5;
                         }
 
                         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'b';
                         
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metka5;
+                            if (parseInt(cell) == k) break metka5;
                         }
                     }
 
@@ -863,13 +865,13 @@ const shahsObj = {
                         const cell = shahsMap[j - 1][i - 1]; 
 
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metka6;
+                            if (parseInt(cell) == k) break metka6;
                         }
 
                         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'b';
                         
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metka6;
+                            if (parseInt(cell) == k) break metka6;
                         }
                     }
 
@@ -877,13 +879,13 @@ const shahsObj = {
                         const cell = shahsMap[j - 1][i - 1]; 
 
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metka7;
+                            if (parseInt(cell) == k) break metka7;
                         }
 
                         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'b';
                         
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metka7;
+                            if (parseInt(cell) == k) break metka7;
                         }
                     }
                 break;
@@ -894,13 +896,13 @@ const shahsObj = {
                         const cell = shahsMap[i - 1][j - 1];
 
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metka8;
+                            if (parseInt(cell) == k) break metka8;
                         }
 
                         shahsMap[i - 1][j - 1] = shahsMap[i - 1][j - 1] + 'b';
                         
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metka8;
+                            if (parseInt(cell) == k) break metka8;
                         }
                     }
 
@@ -908,13 +910,13 @@ const shahsObj = {
                         const cell = shahsMap[i - 1][j - 1];
 
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metka9;
+                            if (parseInt(cell) == k) break metka9;
                         }
 
                         shahsMap[i - 1][j - 1] = shahsMap[i - 1][j - 1] + 'b';
                         
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metka9;
+                            if (parseInt(cell) == k) break metka9;
                         }
                     }
 
@@ -922,13 +924,13 @@ const shahsObj = {
                         const cell = shahsMap[j - 1][i - 1];
 
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metka10;
+                            if (parseInt(cell) == k) break metka10;
                         }
 
                         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'b';
                         
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metka10;
+                            if (parseInt(cell) == k) break metka10;
                         }
                     }
 
@@ -936,13 +938,13 @@ const shahsObj = {
                         const cell = shahsMap[j - 1][i - 1];
 
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metka11;
+                            if (parseInt(cell) == k) break metka11;
                         }
 
                         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'b';
                         
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metka11;
+                            if (parseInt(cell) == k) break metka11;
                         }
                     }
 
@@ -951,13 +953,13 @@ const shahsObj = {
                         const cell = shahsMap[j - 1][i - 1]; 
 
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metk;
+                            if (parseInt(cell) == k) break metk;
                         }
 
                         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'b';
                         
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metk;
+                            if (parseInt(cell) == k) break metk;
                         }
                     }
 
@@ -965,13 +967,13 @@ const shahsObj = {
                         const cell = shahsMap[j - 1][i - 1]; 
 
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metk1;
+                            if (parseInt(cell) == k) break metk1;
                         }
 
                         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'b';
                         
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metk1;
+                            if (parseInt(cell) == k) break metk1;
                         }
                     }
 
@@ -979,13 +981,13 @@ const shahsObj = {
                         const cell = shahsMap[j - 1][i - 1]; 
 
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metk2;
+                            if (parseInt(cell) == k) break metk2;
                         }
 
                         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'b';
                         
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metk2;
+                            if (parseInt(cell) == k) break metk2;
                         }
                     }
 
@@ -993,13 +995,13 @@ const shahsObj = {
                         const cell = shahsMap[j - 1][i - 1]; 
 
                         for (let k of blackFigures) {
-                            if (cell.includes(k)) break metk3;
+                            if (parseInt(cell) == k) break metk3;
                         }
 
                         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'b';
                         
                         for (let k of whiteFigures) {
-                            if (cell.includes(k)) break metk3;
+                            if (parseInt(cell) == k) break metk3;
                         }
                     }
                 break;
@@ -1010,7 +1012,7 @@ const shahsObj = {
                         const cell = shahsMap[figure5.y - 1 + 1][figure5.x - 1 - 1];
                         let ysl = false;
                         for (let k of blackFigures) {
-                            if (!cell.includes(k)) {
+                            if (!parseInt(cell) == k) {
                                 ysl = true;
                             } else {
                                 ysl = false;
@@ -1026,7 +1028,7 @@ const shahsObj = {
                         const cell = shahsMap[figure5.y - 1 + 1][figure5.x - 1];
                         let ysl = false;
                         for (let k of blackFigures) {
-                            if (!cell.includes(k)) {
+                            if (!parseInt(cell) == k) {
                                 ysl = true;
                             } else {
                                 ysl = false;
@@ -1042,7 +1044,7 @@ const shahsObj = {
                         const cell = shahsMap[figure5.y - 1 + 1][figure5.x - 1 + 1];
                         let ysl = false;
                         for (let k of blackFigures) {
-                            if (!cell.includes(k)) {
+                            if (!parseInt(cell) == k) {
                                 ysl = true;
                             } else {
                                 ysl = false;
@@ -1059,7 +1061,7 @@ const shahsObj = {
                         const cell = shahsMap[figure5.y - 1][figure5.x - 1 + 1];
                         let ysl = false;
                         for (let k of blackFigures) {
-                            if (!cell.includes(k)) {
+                            if (!parseInt(cell) == k) {
                                 ysl = true;
                             } else {
                                 ysl = false;
@@ -1075,7 +1077,7 @@ const shahsObj = {
                         const cell = shahsMap[figure5.y - 1][figure5.x - 1 - 1];
                         let ysl = false;
                         for (let k of blackFigures) {
-                            if (!cell.includes(k)) {
+                            if (!parseInt(cell) == k) {
                                 ysl = true;
                             } else {
                                 ysl = false;
@@ -1092,7 +1094,7 @@ const shahsObj = {
                         const cell = shahsMap[figure5.y - 1 - 1][figure5.x - 1 - 1];
                         let ysl = false;
                         for (let k of blackFigures) {
-                            if (!cell.includes(k)) {
+                            if (!parseInt(cell) == k) {
                                 ysl = true;
                             } else {
                                 ysl = false;
@@ -1108,7 +1110,7 @@ const shahsObj = {
                         const cell = shahsMap[figure5.y - 1 - 1][figure5.x - 1];
                         let ysl = false;
                         for (let k of blackFigures) {
-                            if (!cell.includes(k)) {
+                            if (!parseInt(cell) == k) {
                                 ysl = true;
                             } else {
                                 ysl = false;
@@ -1124,7 +1126,7 @@ const shahsObj = {
                         const cell = shahsMap[figure5.y - 1 - 1][figure5.x - 1 + 1];
                         let ysl = false;
                         for (let k of blackFigures) {
-                            if (!cell.includes(k)) {
+                            if (!parseInt(cell) == k) {
                                 ysl = true;
                             } else {
                                 ysl = false;
@@ -1152,7 +1154,29 @@ const shahsObj = {
         this.refreshShahsMap();
         this._refreshBlackShahs();
         this._refreshWhiteShahs();
-    }
+    },
+    checkWhiteShah: function() {
+        const kingId = 29;
+        const king = figureForId(kingId);
+        let index = getIndexOnShahsMap(kingId);
+
+        function getIndexOnShahsMap(id) {
+            for (let i = 0; i < 8; i++) {
+                for (let j = 0; j < 8; j++) {
+                    if (shahsMap[i][j].includes(id)) {
+                        return `${j + 1}${i + 1}`;
+                    }
+                }
+            }
+        }
+
+        if (shahsMap[index[1] - 1][index[0] - 1].includes('b')) {
+            gameState.whiteShah = true;
+            alert('Шах белым!');
+        } else {
+            gameState.whiteShah = false;
+        }
+    },
 };
 
 function CreateFigure(id) {
