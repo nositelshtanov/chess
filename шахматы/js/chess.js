@@ -91,16 +91,13 @@ const shahsObj = {
 
             shahsMap.push(tempArr);
         }
-        // shahsMap.reverse();
     },
-    refreshWHiteShahs: function() {
+    _refreshWhiteShahs: function() {
         const whiteFigures = ['17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32'];
         const blackFigures = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16'];
         const figuresElements = document.body.querySelector('.board').querySelectorAll('.white-team');
 
         const figures = [];
-        
-        this.refreshShahsMap();
 
         for (let figureElement of figuresElements) {
             const id = figureElement.id.slice(1);
@@ -111,377 +108,377 @@ const shahsObj = {
 
         for (let figureId of figures) {
             switch (figureForId(figureId).type) {
-                // case 'pawn':
-                //     const figure = figureForId(figureId);
+                case 'pawn':
+                    const figure = figureForId(figureId);
 
-                //     if (shahsMap[figure.y - 1 + 1]?.[figure.x - 1 - 1] != undefined) {
-                //         shahsMap[figure.y - 1 + 1][figure.x - 1 - 1] = shahsMap[figure.y - 1 + 1][figure.x - 1 - 1] + 'w';
-                //     }
+                    if (shahsMap[figure.y - 1 + 1]?.[figure.x - 1 - 1] != undefined) {
+                        shahsMap[figure.y - 1 + 1][figure.x - 1 - 1] = shahsMap[figure.y - 1 + 1][figure.x - 1 - 1] + 'w';
+                    }
 
-                //     if (shahsMap[figure.y - 1 + 1]?.[figure.x - 1 + 1] != undefined) {
-                //         shahsMap[figure.y - 1 + 1][figure.x - 1 + 1] = shahsMap[figure.y - 1 + 1][figure.x - 1 + 1] + 'w';
-                //     }
-                // break;
-                // case 'rook':
-                //     const figure1 = figureForId(figureId);
+                    if (shahsMap[figure.y - 1 + 1]?.[figure.x - 1 + 1] != undefined) {
+                        shahsMap[figure.y - 1 + 1][figure.x - 1 + 1] = shahsMap[figure.y - 1 + 1][figure.x - 1 + 1] + 'w';
+                    }
+                break;
+                case 'rook':
+                    const figure1 = figureForId(figureId);
 
-                //     metka: for (let i = figure1.y + 1, j = figure1.x; i <= 8 && i >= 1; i++) {
-                //         const cell = shahsMap[i - 1][j - 1];
+                    metka: for (let i = figure1.y + 1, j = figure1.x; i <= 8 && i >= 1; i++) {
+                        const cell = shahsMap[i - 1][j - 1];
 
-                //         for (let k of whiteFigures) {
-                //             if (cell.includes(k)) break metka;
-                //         }
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metka;
+                        }
 
-                //         shahsMap[i - 1][j - 1] = shahsMap[i - 1][j - 1] + 'w';
+                        shahsMap[i - 1][j - 1] = shahsMap[i - 1][j - 1] + 'w';
                         
-                //         for (let k of blackFigures) {
-                //             if (cell.includes(k)) break metka;
-                //         }
-                //     }
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metka;
+                        }
+                    }
 
-                //     metka1: for (let i = figure1.y - 1, j = figure1.x; i <= 8 && i >= 1; i--) {
-                //         const cell = shahsMap[i - 1][j - 1];
+                    metka1: for (let i = figure1.y - 1, j = figure1.x; i <= 8 && i >= 1; i--) {
+                        const cell = shahsMap[i - 1][j - 1];
 
-                //         for (let k of whiteFigures) {
-                //             if (cell.includes(k)) break metka1;
-                //         }
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metka1;
+                        }
 
-                //         shahsMap[i - 1][j - 1] = shahsMap[i - 1][j - 1] + 'w';
+                        shahsMap[i - 1][j - 1] = shahsMap[i - 1][j - 1] + 'w';
                         
-                //         for (let k of blackFigures) {
-                //             if (cell.includes(k)) break metka1;
-                //         }
-                //     }
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metka1;
+                        }
+                    }
 
-                //     metka2: for (let i = figure1.x + 1, j = figure1.y; i <= 8 && i >= 1; i++) {
-                //         const cell = shahsMap[j - 1][i - 1];
+                    metka2: for (let i = figure1.x + 1, j = figure1.y; i <= 8 && i >= 1; i++) {
+                        const cell = shahsMap[j - 1][i - 1];
 
-                //         for (let k of whiteFigures) {
-                //             if (cell.includes(k)) break metka2;
-                //         }
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metka2;
+                        }
 
-                //         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
+                        shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
                         
-                //         for (let k of blackFigures) {
-                //             if (cell.includes(k)) break metka2;
-                //         }
-                //     }
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metka2;
+                        }
+                    }
 
-                //     metka3: for (let i = figure1.x - 1, j = figure1.y; i <= 8 && i >= 1; i--) {
-                //         const cell = shahsMap[j - 1][i - 1];
+                    metka3: for (let i = figure1.x - 1, j = figure1.y; i <= 8 && i >= 1; i--) {
+                        const cell = shahsMap[j - 1][i - 1];
 
-                //         for (let k of whiteFigures) {
-                //             if (cell.includes(k)) break metka3;
-                //         }
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metka3;
+                        }
 
-                //         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
+                        shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
                         
-                //         for (let k of blackFigures) {
-                //             if (cell.includes(k)) break metka3;
-                //         }
-                //     }
-                // break;
-                // case 'horse':
-                //     const figure2 = figureForId(figureId);
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metka3;
+                        }
+                    }
+                break;
+                case 'horse':
+                    const figure2 = figureForId(figureId);
 
                     
-                //     if (shahsMap[figure2.y - 1 + 2]?.[figure2.x - 1 - 1] != undefined) {
-                //         let yslovie = false;
-                //         for (let k of figures) {
-                //             if (!shahsMap[figure2.y - 1 + 2][figure2.x - 1 - 1].includes(k)) {
-                //                 yslovie = true;
-                //             } else {
-                //                 yslovie = false;
-                //                 break;
-                //             }
-                //         }
+                    if (shahsMap[figure2.y - 1 + 2]?.[figure2.x - 1 - 1] != undefined) {
+                        let yslovie = false;
+                        for (let k of figures) {
+                            if (!shahsMap[figure2.y - 1 + 2][figure2.x - 1 - 1].includes(k)) {
+                                yslovie = true;
+                            } else {
+                                yslovie = false;
+                                break;
+                            }
+                        }
                         
-                //         if (yslovie) {
-                //             shahsMap[figure2.y - 1 + 2][figure2.x - 1 - 1] = shahsMap[figure2.y - 1 + 2][figure2.x - 1 - 1] + 'w';
-                //         }
-                //     }
-                //     if (shahsMap[figure2.y - 1 + 2]?.[figure2.x - 1 + 1] != undefined) {
-                //         let yslovie = false;
-                //         for (let k of figures) {
-                //             if (!shahsMap[figure2.y - 1 + 2][figure2.x - 1 + 1].includes(k)) {
-                //                 yslovie = true;
-                //             } else {
-                //                 yslovie = false;
-                //                 break;
-                //             }
-                //         }
+                        if (yslovie) {
+                            shahsMap[figure2.y - 1 + 2][figure2.x - 1 - 1] = shahsMap[figure2.y - 1 + 2][figure2.x - 1 - 1] + 'w';
+                        }
+                    }
+                    if (shahsMap[figure2.y - 1 + 2]?.[figure2.x - 1 + 1] != undefined) {
+                        let yslovie = false;
+                        for (let k of figures) {
+                            if (!shahsMap[figure2.y - 1 + 2][figure2.x - 1 + 1].includes(k)) {
+                                yslovie = true;
+                            } else {
+                                yslovie = false;
+                                break;
+                            }
+                        }
                         
-                //         if (yslovie) {
-                //             shahsMap[figure2.y - 1 + 2][figure2.x - 1 + 1] = shahsMap[figure2.y - 1 + 2][figure2.x - 1 + 1] + 'w';
-                //         }
-                //     }
-                //     if (shahsMap[figure2.y - 1 - 2]?.[figure2.x - 1 - 1] != undefined) {
-                //         let yslovie = false;
-                //         for (let k of figures) {
-                //             if (!shahsMap[figure2.y - 1 - 2][figure2.x - 1 - 1].includes(k)) {
-                //                 yslovie = true;
-                //             } else {
-                //                 yslovie = false;
-                //                 break;
-                //             }
-                //         }
+                        if (yslovie) {
+                            shahsMap[figure2.y - 1 + 2][figure2.x - 1 + 1] = shahsMap[figure2.y - 1 + 2][figure2.x - 1 + 1] + 'w';
+                        }
+                    }
+                    if (shahsMap[figure2.y - 1 - 2]?.[figure2.x - 1 - 1] != undefined) {
+                        let yslovie = false;
+                        for (let k of figures) {
+                            if (!shahsMap[figure2.y - 1 - 2][figure2.x - 1 - 1].includes(k)) {
+                                yslovie = true;
+                            } else {
+                                yslovie = false;
+                                break;
+                            }
+                        }
                         
-                //         if (yslovie) {
-                //             shahsMap[figure2.y - 1 - 2][figure2.x - 1 - 1] = shahsMap[figure2.y - 1 - 2][figure2.x - 1 - 1] + 'w';
-                //         }
-                //     }
-                //     if (shahsMap[figure2.y - 1 - 2]?.[figure2.x - 1 + 1] != undefined) {
-                //         let yslovie = false;
-                //         for (let k of figures) {
-                //             if (!shahsMap[figure2.y - 1 - 2][figure2.x - 1 + 1].includes(k)) {
-                //                 yslovie = true;
-                //             } else {
-                //                 yslovie = false;
-                //                 break;
-                //             }
-                //         }
+                        if (yslovie) {
+                            shahsMap[figure2.y - 1 - 2][figure2.x - 1 - 1] = shahsMap[figure2.y - 1 - 2][figure2.x - 1 - 1] + 'w';
+                        }
+                    }
+                    if (shahsMap[figure2.y - 1 - 2]?.[figure2.x - 1 + 1] != undefined) {
+                        let yslovie = false;
+                        for (let k of figures) {
+                            if (!shahsMap[figure2.y - 1 - 2][figure2.x - 1 + 1].includes(k)) {
+                                yslovie = true;
+                            } else {
+                                yslovie = false;
+                                break;
+                            }
+                        }
                         
-                //         if (yslovie) {
-                //             shahsMap[figure2.y - 1 - 2][figure2.x - 1 + 1] = shahsMap[figure2.y - 1 - 2][figure2.x - 1 + 1] + 'w';
-                //         }
-                //     }
-                //     if (shahsMap[figure2.y - 1 + 1]?.[figure2.x - 1 - 2] != undefined) {
-                //         let yslovie = false;
-                //         for (let k of figures) {
-                //             if (!shahsMap[figure2.y - 1 + 1][figure2.x - 1 - 2].includes(k)) {
-                //                 yslovie = true;
-                //             } else {
-                //                 yslovie = false;
-                //                 break;
-                //             }
-                //         }
+                        if (yslovie) {
+                            shahsMap[figure2.y - 1 - 2][figure2.x - 1 + 1] = shahsMap[figure2.y - 1 - 2][figure2.x - 1 + 1] + 'w';
+                        }
+                    }
+                    if (shahsMap[figure2.y - 1 + 1]?.[figure2.x - 1 - 2] != undefined) {
+                        let yslovie = false;
+                        for (let k of figures) {
+                            if (!shahsMap[figure2.y - 1 + 1][figure2.x - 1 - 2].includes(k)) {
+                                yslovie = true;
+                            } else {
+                                yslovie = false;
+                                break;
+                            }
+                        }
                         
-                //         if (yslovie) {
-                //             shahsMap[figure2.y - 1 + 1][figure2.x - 1 - 2] = shahsMap[figure2.y - 1 + 1][figure2.x - 1 - 2] + 'w';
-                //         }
-                //     }
-                //     if (shahsMap[figure2.y - 1 + 1]?.[figure2.x - 1 + 2] != undefined) {
-                //         let yslovie = false;
-                //         for (let k of figures) {
-                //             if (!shahsMap[figure2.y - 1 + 1][figure2.x - 1 + 2].includes(k)) {
-                //                 yslovie = true;
-                //             } else {
-                //                 yslovie = false;
-                //                 break;
-                //             }
-                //         }
+                        if (yslovie) {
+                            shahsMap[figure2.y - 1 + 1][figure2.x - 1 - 2] = shahsMap[figure2.y - 1 + 1][figure2.x - 1 - 2] + 'w';
+                        }
+                    }
+                    if (shahsMap[figure2.y - 1 + 1]?.[figure2.x - 1 + 2] != undefined) {
+                        let yslovie = false;
+                        for (let k of figures) {
+                            if (!shahsMap[figure2.y - 1 + 1][figure2.x - 1 + 2].includes(k)) {
+                                yslovie = true;
+                            } else {
+                                yslovie = false;
+                                break;
+                            }
+                        }
                         
-                //         if (yslovie) {
-                //             shahsMap[figure2.y - 1 + 1][figure2.x - 1 + 2] = shahsMap[figure2.y - 1 + 1][figure2.x - 1 + 2] + 'w';
-                //         }
-                //     }
-                //     if (shahsMap[figure2.y - 1 - 1]?.[figure2.x - 1 - 2] != undefined) {
-                //         let yslovie = false;
-                //         for (let k of figures) {
-                //             if (!shahsMap[figure2.y - 1 - 1][figure2.x - 1 - 2].includes(k)) {
-                //                 yslovie = true;
-                //             } else {
-                //                 yslovie = false;
-                //                 break;
-                //             }
-                //         }
+                        if (yslovie) {
+                            shahsMap[figure2.y - 1 + 1][figure2.x - 1 + 2] = shahsMap[figure2.y - 1 + 1][figure2.x - 1 + 2] + 'w';
+                        }
+                    }
+                    if (shahsMap[figure2.y - 1 - 1]?.[figure2.x - 1 - 2] != undefined) {
+                        let yslovie = false;
+                        for (let k of figures) {
+                            if (!shahsMap[figure2.y - 1 - 1][figure2.x - 1 - 2].includes(k)) {
+                                yslovie = true;
+                            } else {
+                                yslovie = false;
+                                break;
+                            }
+                        }
                         
-                //         if (yslovie) {
-                //             shahsMap[figure2.y - 1 - 1][figure2.x - 1 - 2] = shahsMap[figure2.y - 1 - 1][figure2.x - 1 - 2] + 'w';
-                //         }
-                //     }
-                //     if (shahsMap[figure2.y - 1 - 1]?.[figure2.x - 1 + 2] != undefined) {
-                //         let yslovie = false;
-                //         for (let k of figures) {
-                //             if (!shahsMap[figure2.y - 1 - 1][figure2.x - 1 + 2].includes(k)) {
-                //                 yslovie = true;
-                //             } else {
-                //                 yslovie = false;
-                //                 break;
-                //             }
-                //         }
+                        if (yslovie) {
+                            shahsMap[figure2.y - 1 - 1][figure2.x - 1 - 2] = shahsMap[figure2.y - 1 - 1][figure2.x - 1 - 2] + 'w';
+                        }
+                    }
+                    if (shahsMap[figure2.y - 1 - 1]?.[figure2.x - 1 + 2] != undefined) {
+                        let yslovie = false;
+                        for (let k of figures) {
+                            if (!shahsMap[figure2.y - 1 - 1][figure2.x - 1 + 2].includes(k)) {
+                                yslovie = true;
+                            } else {
+                                yslovie = false;
+                                break;
+                            }
+                        }
                         
-                //         if (yslovie) {
-                //             shahsMap[figure2.y - 1 - 1][figure2.x - 1 + 2] = shahsMap[figure2.y - 1 - 1][figure2.x - 1 + 2] + 'w';
-                //         }
-                //     }
+                        if (yslovie) {
+                            shahsMap[figure2.y - 1 - 1][figure2.x - 1 + 2] = shahsMap[figure2.y - 1 - 1][figure2.x - 1 + 2] + 'w';
+                        }
+                    }
                     
-                // break;
-                // case 'elephant':
-                //     const figure3 = figureForId(figureId);
+                break;
+                case 'elephant':
+                    const figure3 = figureForId(figureId);
 
-                //     metka4: for (let i = figure3.x + 1, j = figure3.y + 1; i <= 8 && i >= 1 && j <=8 && j >= 1; i++, j++) {
-                //         const cell = shahsMap[j - 1][i - 1]; 
+                    metka4: for (let i = figure3.x + 1, j = figure3.y + 1; i <= 8 && i >= 1 && j <=8 && j >= 1; i++, j++) {
+                        const cell = shahsMap[j - 1][i - 1]; 
 
-                //         for (let k of whiteFigures) {
-                //             if (cell.includes(k)) break metka4;
-                //         }
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metka4;
+                        }
 
-                //         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
+                        shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
                         
-                //         for (let k of blackFigures) {
-                //             if (cell.includes(k)) break metka4;
-                //         }
-                //     }
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metka4;
+                        }
+                    }
 
-                //     metka5: for (let i = figure3.x - 1, j = figure3.y + 1; i <= 8 && i >= 1 && j <=8 && j >= 1; i--, j++) {
-                //         const cell = shahsMap[j - 1][i - 1]; 
+                    metka5: for (let i = figure3.x - 1, j = figure3.y + 1; i <= 8 && i >= 1 && j <=8 && j >= 1; i--, j++) {
+                        const cell = shahsMap[j - 1][i - 1]; 
 
-                //         for (let k of whiteFigures) {
-                //             if (cell.includes(k)) break metka5;
-                //         }
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metka5;
+                        }
 
-                //         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
+                        shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
                         
-                //         for (let k of blackFigures) {
-                //             if (cell.includes(k)) break metka5;
-                //         }
-                //     }
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metka5;
+                        }
+                    }
 
-                //     metka6: for (let i = figure3.x + 1, j = figure3.y - 1; i <= 8 && i >= 1 && j <=8 && j >= 1; i++, j--) {
-                //         const cell = shahsMap[j - 1][i - 1]; 
+                    metka6: for (let i = figure3.x + 1, j = figure3.y - 1; i <= 8 && i >= 1 && j <=8 && j >= 1; i++, j--) {
+                        const cell = shahsMap[j - 1][i - 1]; 
 
-                //         for (let k of whiteFigures) {
-                //             if (cell.includes(k)) break metka6;
-                //         }
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metka6;
+                        }
 
-                //         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
+                        shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
                         
-                //         for (let k of blackFigures) {
-                //             if (cell.includes(k)) break metka6;
-                //         }
-                //     }
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metka6;
+                        }
+                    }
 
-                //     metka7: for (let i = figure3.x - 1, j = figure3.y - 1; i <= 8 && i >= 1 && j <=8 && j >= 1; i--, j--) {
-                //         const cell = shahsMap[j - 1][i - 1]; 
+                    metka7: for (let i = figure3.x - 1, j = figure3.y - 1; i <= 8 && i >= 1 && j <=8 && j >= 1; i--, j--) {
+                        const cell = shahsMap[j - 1][i - 1]; 
 
-                //         for (let k of whiteFigures) {
-                //             if (cell.includes(k)) break metka7;
-                //         }
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metka7;
+                        }
 
-                //         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
+                        shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
                         
-                //         for (let k of blackFigures) {
-                //             if (cell.includes(k)) break metka7;
-                //         }
-                //     }
-                // break;
-                // case 'queen':
-                //     const figure4 = figureForId(figureId);
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metka7;
+                        }
+                    }
+                break;
+                case 'queen':
+                    const figure4 = figureForId(figureId);
 
-                //     metka8: for (let i = figure4.y + 1, j = figure4.x; i <= 8 && i >= 1; i++) {
-                //         const cell = shahsMap[i - 1][j - 1];
+                    metka8: for (let i = figure4.y + 1, j = figure4.x; i <= 8 && i >= 1; i++) {
+                        const cell = shahsMap[i - 1][j - 1];
 
-                //         for (let k of whiteFigures) {
-                //             if (cell.includes(k)) break metka8;
-                //         }
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metka8;
+                        }
 
-                //         shahsMap[i - 1][j - 1] = shahsMap[i - 1][j - 1] + 'w';
+                        shahsMap[i - 1][j - 1] = shahsMap[i - 1][j - 1] + 'w';
                         
-                //         for (let k of blackFigures) {
-                //             if (cell.includes(k)) break metka8;
-                //         }
-                //     }
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metka8;
+                        }
+                    }
 
-                //     metka9: for (let i = figure4.y - 1, j = figure4.x; i <= 8 && i >= 1; i--) {
-                //         const cell = shahsMap[i - 1][j - 1];
+                    metka9: for (let i = figure4.y - 1, j = figure4.x; i <= 8 && i >= 1; i--) {
+                        const cell = shahsMap[i - 1][j - 1];
 
-                //         for (let k of whiteFigures) {
-                //             if (cell.includes(k)) break metka9;
-                //         }
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metka9;
+                        }
 
-                //         shahsMap[i - 1][j - 1] = shahsMap[i - 1][j - 1] + 'w';
+                        shahsMap[i - 1][j - 1] = shahsMap[i - 1][j - 1] + 'w';
                         
-                //         for (let k of blackFigures) {
-                //             if (cell.includes(k)) break metka9;
-                //         }
-                //     }
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metka9;
+                        }
+                    }
 
-                //     metka10: for (let i = figure4.x + 1, j = figure4.y; i <= 8 && i >= 1; i++) {
-                //         const cell = shahsMap[j - 1][i - 1];
+                    metka10: for (let i = figure4.x + 1, j = figure4.y; i <= 8 && i >= 1; i++) {
+                        const cell = shahsMap[j - 1][i - 1];
 
-                //         for (let k of whiteFigures) {
-                //             if (cell.includes(k)) break metka10;
-                //         }
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metka10;
+                        }
 
-                //         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
+                        shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
                         
-                //         for (let k of blackFigures) {
-                //             if (cell.includes(k)) break metka10;
-                //         }
-                //     }
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metka10;
+                        }
+                    }
 
-                //     metka11: for (let i = figure4.x - 1, j = figure4.y; i <= 8 && i >= 1; i--) {
-                //         const cell = shahsMap[j - 1][i - 1];
+                    metka11: for (let i = figure4.x - 1, j = figure4.y; i <= 8 && i >= 1; i--) {
+                        const cell = shahsMap[j - 1][i - 1];
 
-                //         for (let k of whiteFigures) {
-                //             if (cell.includes(k)) break metka11;
-                //         }
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metka11;
+                        }
 
-                //         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
+                        shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
                         
-                //         for (let k of blackFigures) {
-                //             if (cell.includes(k)) break metka11;
-                //         }
-                //     }
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metka11;
+                        }
+                    }
 
 
-                //     metk: for (let i = figure4.x + 1, j = figure4.y + 1; i <= 8 && i >= 1 && j <=8 && j >= 1; i++, j++) {
-                //         const cell = shahsMap[j - 1][i - 1]; 
+                    metk: for (let i = figure4.x + 1, j = figure4.y + 1; i <= 8 && i >= 1 && j <=8 && j >= 1; i++, j++) {
+                        const cell = shahsMap[j - 1][i - 1]; 
 
-                //         for (let k of whiteFigures) {
-                //             if (cell.includes(k)) break metk;
-                //         }
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metk;
+                        }
 
-                //         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
+                        shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
                         
-                //         for (let k of blackFigures) {
-                //             if (cell.includes(k)) break metk;
-                //         }
-                //     }
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metk;
+                        }
+                    }
 
-                //     metk1: for (let i = figure4.x - 1, j = figure4.y + 1; i <= 8 && i >= 1 && j <=8 && j >= 1; i--, j++) {
-                //         const cell = shahsMap[j - 1][i - 1]; 
+                    metk1: for (let i = figure4.x - 1, j = figure4.y + 1; i <= 8 && i >= 1 && j <=8 && j >= 1; i--, j++) {
+                        const cell = shahsMap[j - 1][i - 1]; 
 
-                //         for (let k of whiteFigures) {
-                //             if (cell.includes(k)) break metk1;
-                //         }
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metk1;
+                        }
 
-                //         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
+                        shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
                         
-                //         for (let k of blackFigures) {
-                //             if (cell.includes(k)) break metk1;
-                //         }
-                //     }
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metk1;
+                        }
+                    }
 
-                //     metk2: for (let i = figure4.x + 1, j = figure4.y - 1; i <= 8 && i >= 1 && j <=8 && j >= 1; i++, j--) {
-                //         const cell = shahsMap[j - 1][i - 1]; 
+                    metk2: for (let i = figure4.x + 1, j = figure4.y - 1; i <= 8 && i >= 1 && j <=8 && j >= 1; i++, j--) {
+                        const cell = shahsMap[j - 1][i - 1]; 
 
-                //         for (let k of whiteFigures) {
-                //             if (cell.includes(k)) break metk2;
-                //         }
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metk2;
+                        }
 
-                //         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
+                        shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
                         
-                //         for (let k of blackFigures) {
-                //             if (cell.includes(k)) break metk2;
-                //         }
-                //     }
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metk2;
+                        }
+                    }
 
-                //     metk3: for (let i = figure4.x - 1, j = figure4.y - 1; i <= 8 && i >= 1 && j <=8 && j >= 1; i--, j--) {
-                //         const cell = shahsMap[j - 1][i - 1]; 
+                    metk3: for (let i = figure4.x - 1, j = figure4.y - 1; i <= 8 && i >= 1 && j <=8 && j >= 1; i--, j--) {
+                        const cell = shahsMap[j - 1][i - 1]; 
 
-                //         for (let k of whiteFigures) {
-                //             if (cell.includes(k)) break metk3;
-                //         }
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metk3;
+                        }
 
-                //         shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
+                        shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'w';
                         
-                //         for (let k of blackFigures) {
-                //             if (cell.includes(k)) break metk3;
-                //         }
-                //     }
-                // break;
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metk3;
+                        }
+                    }
+                break;
                 case 'king':
                     const figure5 = figureForId(figureId);
 
@@ -619,6 +616,543 @@ const shahsObj = {
             }
         }
     },
+    _refreshBlackShahs: function() {
+        const whiteFigures = ['17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32'];
+        const blackFigures = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16'];
+        const figuresElements = document.body.querySelector('.board').querySelectorAll('.black-team');
+
+        const figures = [];
+
+        for (let figureElement of figuresElements) {
+            const id = figureElement.id.slice(1);
+            if (blackFigures.includes(id)) {
+                figures.push(id);
+            }
+        }
+
+        for (let figureId of figures) {
+            switch (figureForId(figureId).type) {
+                case 'pawn':
+                    const figure = figureForId(figureId);
+
+                    if (shahsMap[figure.y - 1 - 1]?.[figure.x - 1 - 1] != undefined) {
+                        shahsMap[figure.y - 1 - 1][figure.x - 1 - 1] = shahsMap[figure.y - 1 - 1][figure.x - 1 - 1] + 'b';
+                    }
+
+                    if (shahsMap[figure.y - 1 - 1]?.[figure.x - 1 + 1] != undefined) {
+                        shahsMap[figure.y - 1 - 1][figure.x - 1 + 1] = shahsMap[figure.y - 1 - 1][figure.x - 1 + 1] + 'b';
+                    }
+                break;
+                case 'rook':
+                    const figure1 = figureForId(figureId);
+
+                    metka: for (let i = figure1.y + 1, j = figure1.x; i <= 8 && i >= 1; i++) {
+                        const cell = shahsMap[i - 1][j - 1];
+
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metka;
+                        }
+
+                        shahsMap[i - 1][j - 1] = shahsMap[i - 1][j - 1] + 'b';
+                        
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metka;
+                        }
+                    }
+
+                    metka1: for (let i = figure1.y - 1, j = figure1.x; i <= 8 && i >= 1; i--) {
+                        const cell = shahsMap[i - 1][j - 1];
+
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metka1;
+                        }
+
+                        shahsMap[i - 1][j - 1] = shahsMap[i - 1][j - 1] + 'b';
+                        
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metka1;
+                        }
+                    }
+
+                    metka2: for (let i = figure1.x + 1, j = figure1.y; i <= 8 && i >= 1; i++) {
+                        const cell = shahsMap[j - 1][i - 1];
+
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metka2;
+                        }
+
+                        shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'b';
+                        
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metka2;
+                        }
+                    }
+
+                    metka3: for (let i = figure1.x - 1, j = figure1.y; i <= 8 && i >= 1; i--) {
+                        const cell = shahsMap[j - 1][i - 1];
+
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metka3;
+                        }
+
+                        shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'b';
+                        
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metka3;
+                        }
+                    }
+                break;
+                case 'horse':
+                    const figure2 = figureForId(figureId);
+
+                    
+                    if (shahsMap[figure2.y - 1 + 2]?.[figure2.x - 1 - 1] != undefined) {
+                        let yslovie = false;
+                        for (let k of figures) {
+                            if (!shahsMap[figure2.y - 1 + 2][figure2.x - 1 - 1].includes(k)) {
+                                yslovie = true;
+                            } else {
+                                yslovie = false;
+                                break;
+                            }
+                        }
+                        
+                        if (yslovie) {
+                            shahsMap[figure2.y - 1 + 2][figure2.x - 1 - 1] = shahsMap[figure2.y - 1 + 2][figure2.x - 1 - 1] + 'b';
+                        }
+                    }
+                    if (shahsMap[figure2.y - 1 + 2]?.[figure2.x - 1 + 1] != undefined) {
+                        let yslovie = false;
+                        for (let k of figures) {
+                            if (!shahsMap[figure2.y - 1 + 2][figure2.x - 1 + 1].includes(k)) {
+                                yslovie = true;
+                            } else {
+                                yslovie = false;
+                                break;
+                            }
+                        }
+                        
+                        if (yslovie) {
+                            shahsMap[figure2.y - 1 + 2][figure2.x - 1 + 1] = shahsMap[figure2.y - 1 + 2][figure2.x - 1 + 1] + 'b';
+                        }
+                    }
+                    if (shahsMap[figure2.y - 1 - 2]?.[figure2.x - 1 - 1] != undefined) {
+                        let yslovie = false;
+                        for (let k of figures) {
+                            if (!shahsMap[figure2.y - 1 - 2][figure2.x - 1 - 1].includes(k)) {
+                                yslovie = true;
+                            } else {
+                                yslovie = false;
+                                break;
+                            }
+                        }
+                        
+                        if (yslovie) {
+                            shahsMap[figure2.y - 1 - 2][figure2.x - 1 - 1] = shahsMap[figure2.y - 1 - 2][figure2.x - 1 - 1] + 'b';
+                        }
+                    }
+                    if (shahsMap[figure2.y - 1 - 2]?.[figure2.x - 1 + 1] != undefined) {
+                        let yslovie = false;
+                        for (let k of figures) {
+                            if (!shahsMap[figure2.y - 1 - 2][figure2.x - 1 + 1].includes(k)) {
+                                yslovie = true;
+                            } else {
+                                yslovie = false;
+                                break;
+                            }
+                        }
+                        
+                        if (yslovie) {
+                            shahsMap[figure2.y - 1 - 2][figure2.x - 1 + 1] = shahsMap[figure2.y - 1 - 2][figure2.x - 1 + 1] + 'b';
+                        }
+                    }
+                    if (shahsMap[figure2.y - 1 + 1]?.[figure2.x - 1 - 2] != undefined) {
+                        let yslovie = false;
+                        for (let k of figures) {
+                            if (!shahsMap[figure2.y - 1 + 1][figure2.x - 1 - 2].includes(k)) {
+                                yslovie = true;
+                            } else {
+                                yslovie = false;
+                                break;
+                            }
+                        }
+                        
+                        if (yslovie) {
+                            shahsMap[figure2.y - 1 + 1][figure2.x - 1 - 2] = shahsMap[figure2.y - 1 + 1][figure2.x - 1 - 2] + 'b';
+                        }
+                    }
+                    if (shahsMap[figure2.y - 1 + 1]?.[figure2.x - 1 + 2] != undefined) {
+                        let yslovie = false;
+                        for (let k of figures) {
+                            if (!shahsMap[figure2.y - 1 + 1][figure2.x - 1 + 2].includes(k)) {
+                                yslovie = true;
+                            } else {
+                                yslovie = false;
+                                break;
+                            }
+                        }
+                        
+                        if (yslovie) {
+                            shahsMap[figure2.y - 1 + 1][figure2.x - 1 + 2] = shahsMap[figure2.y - 1 + 1][figure2.x - 1 + 2] + 'b';
+                        }
+                    }
+                    if (shahsMap[figure2.y - 1 - 1]?.[figure2.x - 1 - 2] != undefined) {
+                        let yslovie = false;
+                        for (let k of figures) {
+                            if (!shahsMap[figure2.y - 1 - 1][figure2.x - 1 - 2].includes(k)) {
+                                yslovie = true;
+                            } else {
+                                yslovie = false;
+                                break;
+                            }
+                        }
+                        
+                        if (yslovie) {
+                            shahsMap[figure2.y - 1 - 1][figure2.x - 1 - 2] = shahsMap[figure2.y - 1 - 1][figure2.x - 1 - 2] + 'b';
+                        }
+                    }
+                    if (shahsMap[figure2.y - 1 - 1]?.[figure2.x - 1 + 2] != undefined) {
+                        let yslovie = false;
+                        for (let k of figures) {
+                            if (!shahsMap[figure2.y - 1 - 1][figure2.x - 1 + 2].includes(k)) {
+                                yslovie = true;
+                            } else {
+                                yslovie = false;
+                                break;
+                            }
+                        }
+                        
+                        if (yslovie) {
+                            shahsMap[figure2.y - 1 - 1][figure2.x - 1 + 2] = shahsMap[figure2.y - 1 - 1][figure2.x - 1 + 2] + 'b';
+                        }
+                    }
+                    
+                break;
+                case 'elephant':
+                    const figure3 = figureForId(figureId);
+
+                    metka4: for (let i = figure3.x + 1, j = figure3.y + 1; i <= 8 && i >= 1 && j <=8 && j >= 1; i++, j++) {
+                        const cell = shahsMap[j - 1][i - 1]; 
+
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metka4;
+                        }
+
+                        shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'b';
+                        
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metka4;
+                        }
+                    }
+
+                    metka5: for (let i = figure3.x - 1, j = figure3.y + 1; i <= 8 && i >= 1 && j <=8 && j >= 1; i--, j++) {
+                        const cell = shahsMap[j - 1][i - 1]; 
+
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metka5;
+                        }
+
+                        shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'b';
+                        
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metka5;
+                        }
+                    }
+
+                    metka6: for (let i = figure3.x + 1, j = figure3.y - 1; i <= 8 && i >= 1 && j <=8 && j >= 1; i++, j--) {
+                        const cell = shahsMap[j - 1][i - 1]; 
+
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metka6;
+                        }
+
+                        shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'b';
+                        
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metka6;
+                        }
+                    }
+
+                    metka7: for (let i = figure3.x - 1, j = figure3.y - 1; i <= 8 && i >= 1 && j <=8 && j >= 1; i--, j--) {
+                        const cell = shahsMap[j - 1][i - 1]; 
+
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metka7;
+                        }
+
+                        shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'b';
+                        
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metka7;
+                        }
+                    }
+                break;
+                case 'queen':
+                    const figure4 = figureForId(figureId);
+
+                    metka8: for (let i = figure4.y + 1, j = figure4.x; i <= 8 && i >= 1; i++) {
+                        const cell = shahsMap[i - 1][j - 1];
+
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metka8;
+                        }
+
+                        shahsMap[i - 1][j - 1] = shahsMap[i - 1][j - 1] + 'b';
+                        
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metka8;
+                        }
+                    }
+
+                    metka9: for (let i = figure4.y - 1, j = figure4.x; i <= 8 && i >= 1; i--) {
+                        const cell = shahsMap[i - 1][j - 1];
+
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metka9;
+                        }
+
+                        shahsMap[i - 1][j - 1] = shahsMap[i - 1][j - 1] + 'b';
+                        
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metka9;
+                        }
+                    }
+
+                    metka10: for (let i = figure4.x + 1, j = figure4.y; i <= 8 && i >= 1; i++) {
+                        const cell = shahsMap[j - 1][i - 1];
+
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metka10;
+                        }
+
+                        shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'b';
+                        
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metka10;
+                        }
+                    }
+
+                    metka11: for (let i = figure4.x - 1, j = figure4.y; i <= 8 && i >= 1; i--) {
+                        const cell = shahsMap[j - 1][i - 1];
+
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metka11;
+                        }
+
+                        shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'b';
+                        
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metka11;
+                        }
+                    }
+
+
+                    metk: for (let i = figure4.x + 1, j = figure4.y + 1; i <= 8 && i >= 1 && j <=8 && j >= 1; i++, j++) {
+                        const cell = shahsMap[j - 1][i - 1]; 
+
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metk;
+                        }
+
+                        shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'b';
+                        
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metk;
+                        }
+                    }
+
+                    metk1: for (let i = figure4.x - 1, j = figure4.y + 1; i <= 8 && i >= 1 && j <=8 && j >= 1; i--, j++) {
+                        const cell = shahsMap[j - 1][i - 1]; 
+
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metk1;
+                        }
+
+                        shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'b';
+                        
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metk1;
+                        }
+                    }
+
+                    metk2: for (let i = figure4.x + 1, j = figure4.y - 1; i <= 8 && i >= 1 && j <=8 && j >= 1; i++, j--) {
+                        const cell = shahsMap[j - 1][i - 1]; 
+
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metk2;
+                        }
+
+                        shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'b';
+                        
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metk2;
+                        }
+                    }
+
+                    metk3: for (let i = figure4.x - 1, j = figure4.y - 1; i <= 8 && i >= 1 && j <=8 && j >= 1; i--, j--) {
+                        const cell = shahsMap[j - 1][i - 1]; 
+
+                        for (let k of blackFigures) {
+                            if (cell.includes(k)) break metk3;
+                        }
+
+                        shahsMap[j - 1][i - 1] = shahsMap[j - 1][i - 1] + 'b';
+                        
+                        for (let k of whiteFigures) {
+                            if (cell.includes(k)) break metk3;
+                        }
+                    }
+                break;
+                case 'king':
+                    const figure5 = figureForId(figureId);
+
+                    if (shahsMap[figure5.y - 1 + 1]?.[figure5.x - 1 - 1] != undefined) {
+                        const cell = shahsMap[figure5.y - 1 + 1][figure5.x - 1 - 1];
+                        let ysl = false;
+                        for (let k of blackFigures) {
+                            if (!cell.includes(k)) {
+                                ysl = true;
+                            } else {
+                                ysl = false;
+                                break;
+                            }
+                        }
+
+                        if (ysl) {
+                            shahsMap[figure5.y - 1 + 1][figure5.x - 1 - 1] = shahsMap[figure5.y - 1 + 1][figure5.x - 1 - 1] + "b";
+                        }
+                    }
+                    if (shahsMap[figure5.y - 1 + 1]?.[figure5.x - 1] != undefined) {
+                        const cell = shahsMap[figure5.y - 1 + 1][figure5.x - 1];
+                        let ysl = false;
+                        for (let k of blackFigures) {
+                            if (!cell.includes(k)) {
+                                ysl = true;
+                            } else {
+                                ysl = false;
+                                break;
+                            }
+                        }
+
+                        if (ysl) {
+                            shahsMap[figure5.y - 1 + 1][figure5.x - 1] = shahsMap[figure5.y - 1 + 1][figure5.x - 1] + "b";
+                        }
+                    }
+                    if (shahsMap[figure5.y - 1 + 1]?.[figure5.x - 1 + 1] != undefined) {
+                        const cell = shahsMap[figure5.y - 1 + 1][figure5.x - 1 + 1];
+                        let ysl = false;
+                        for (let k of blackFigures) {
+                            if (!cell.includes(k)) {
+                                ysl = true;
+                            } else {
+                                ysl = false;
+                                break;
+                            }
+                        }
+
+                        if (ysl) {
+                            shahsMap[figure5.y - 1 + 1][figure5.x - 1 + 1] = shahsMap[figure5.y - 1 + 1][figure5.x - 1 + 1] + "b";
+                        }
+                    }
+
+                    if (shahsMap[figure5.y - 1]?.[figure5.x - 1 + 1] != undefined) {
+                        const cell = shahsMap[figure5.y - 1][figure5.x - 1 + 1];
+                        let ysl = false;
+                        for (let k of blackFigures) {
+                            if (!cell.includes(k)) {
+                                ysl = true;
+                            } else {
+                                ysl = false;
+                                break;
+                            }
+                        }
+
+                        if (ysl) {
+                            shahsMap[figure5.y - 1][figure5.x - 1 + 1] = shahsMap[figure5.y - 1][figure5.x - 1 + 1] + "b";
+                        }
+                    }
+                    if (shahsMap[figure5.y - 1]?.[figure5.x - 1 - 1] != undefined) {
+                        const cell = shahsMap[figure5.y - 1][figure5.x - 1 - 1];
+                        let ysl = false;
+                        for (let k of blackFigures) {
+                            if (!cell.includes(k)) {
+                                ysl = true;
+                            } else {
+                                ysl = false;
+                                break;
+                            }
+                        }
+
+                        if (ysl) {
+                            shahsMap[figure5.y - 1][figure5.x - 1 - 1] = shahsMap[figure5.y - 1][figure5.x - 1 - 1] + "b";
+                        }
+                    }
+
+                    if (shahsMap[figure5.y - 1 - 1]?.[figure5.x - 1 - 1] != undefined) {
+                        const cell = shahsMap[figure5.y - 1 - 1][figure5.x - 1 - 1];
+                        let ysl = false;
+                        for (let k of blackFigures) {
+                            if (!cell.includes(k)) {
+                                ysl = true;
+                            } else {
+                                ysl = false;
+                                break;
+                            }
+                        }
+
+                        if (ysl) {
+                            shahsMap[figure5.y - 1 - 1][figure5.x - 1 - 1] = shahsMap[figure5.y - 1 - 1][figure5.x - 1 - 1] + "b";
+                        }
+                    }
+                    if (shahsMap[figure5.y - 1 - 1]?.[figure5.x - 1] != undefined) {
+                        const cell = shahsMap[figure5.y - 1 - 1][figure5.x - 1];
+                        let ysl = false;
+                        for (let k of blackFigures) {
+                            if (!cell.includes(k)) {
+                                ysl = true;
+                            } else {
+                                ysl = false;
+                                break;
+                            }
+                        }
+
+                        if (ysl) {
+                            shahsMap[figure5.y - 1 - 1][figure5.x - 1] = shahsMap[figure5.y - 1 - 1][figure5.x - 1] + "b";
+                        }
+                    }
+                    if (shahsMap[figure5.y - 1 - 1]?.[figure5.x - 1 + 1] != undefined) {
+                        const cell = shahsMap[figure5.y - 1 - 1][figure5.x - 1 + 1];
+                        let ysl = false;
+                        for (let k of blackFigures) {
+                            if (!cell.includes(k)) {
+                                ysl = true;
+                            } else {
+                                ysl = false;
+                                break;
+                            }
+                        }
+
+                        if (ysl) {
+                            shahsMap[figure5.y - 1 - 1][figure5.x - 1 + 1] = shahsMap[figure5.y - 1 - 1][figure5.x - 1 + 1] + "b";
+                        }
+                    }
+                break;
+            }
+        }
+    },
+    refreshWhiteShahs: function() {
+        this.refreshShahsMap();
+        this._refreshWhiteShahs();
+    },
+    refreshBlackShahs: function() {
+        this.refreshShahsMap();
+        this._refreshBlackShahs();
+    },
+    refreshAllShahs: function() {
+        this.refreshShahsMap();
+        this._refreshBlackShahs();
+        this._refreshWhiteShahs();
+    }
 };
 
 function CreateFigure(id) {
