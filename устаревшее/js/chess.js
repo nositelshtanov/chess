@@ -32,68 +32,6 @@ const f1  = new CreateFigure(1),
       f32 = new CreateFigure(32);
 let f33, f34;
 
-function queenWalk(cellNumber) {
-    const cellX = Number(cellNumber[1]);
-    const cellY = Number(cellNumber[2]);
-
-    if ( ((Math.abs(this.x - cellX) == Math.abs(this.y - cellY)) || (this.x == cellX || this.y == cellY)) && ((gameMap[cellY - 1][cellX - 1] == null) || (gameMap[cellY - 1][cellX - 1].team != this.team && gameMap[cellY - 1][cellX - 1].type != 'king'))) {
-
-        if (this.x == cellX) {
-            if (this.y > cellY) {
-                for (let i = this.y - 1; i > cellY; i--) {
-                    if (gameMap[i - 1][this.x - 1] != null) return false;
-                }
-            } else if (this.y < cellY) {
-                for (let i = this.y + 1; i < cellY; i++) {
-                    if (gameMap[i - 1][this.x - 1] != null) return false;
-                }
-            }
-        } else if (this.y == cellY) {
-            if (this.x > cellX) {
-                for (let i = this.x - 1; i > cellX; i--) {
-                    if (gameMap[this.y - 1][i - 1] != null) return false;
-                }
-            } else if (this.x < cellX) {
-                for (let i = this.x + 1; i < cellX; i++) {
-                    if (gameMap[this.y - 1][i - 1] != null) return false;
-                }
-            }
-        }
-
-        if (this.y > cellY) {
-            if (this.x > cellX) {
-                for (let i = this.x - 1, j = this.y - 1; i > cellX && j > cellY; i--, j--) {
-                    if (gameMap[j - 1][i - 1] != null) return false;
-                }
-            } else if (this.x < cellX){
-                for (let i = this.x + 1, j = this.y - 1; i < cellX && j > cellY; i++, j--) {
-                    if (gameMap[j - 1][i - 1] != null) return false;
-                    const cellX = Number(cellNumber[1]);
-                    const cellY = Number(cellNumber[2]);         if (gameMap[j - 1][i - 1] != null) return false;
-                }
-            } else if (this.x < cellX) {
-                for (let i = this.x + 1, j = this.y + 1; i < cellX && j < cellY; i++, j++ ) {
-                    if (gameMap[j - 1][i - 1] != null) return false;
-                }
-            }
-        }
-
-        if (gameMap[cellY - 1][cellX - 1] != null) {
-            gameMap[cellY - 1][cellX - 1].death();
-        }
-
-        gameMap[this.y - 1][this.x - 1] = null;
-        this.x = cellX;
-        this.y = cellY;
-        gameMap[this.y - 1][this.x - 1] = this;
-        domEngine.replaceFigure(this.id, Number(String(cellX) + String(cellY)));
-
-        return true;
-    }
-
-    return false;
-}
-
 const gameMap = [[f1,f2,f3,f4,f5,f6,f7,f8],
                  [f9,f10,f11,f12,f13,f14,f15,f16],
                  [null,null,null,null,null,null,null,null],
@@ -112,58 +50,6 @@ const gameState = {
     currentFigure: null,
     targetCell: null,
 }; 
-
-const gameObj = {
-    createQueen: function(id) {
-        const pawn = figureForId(id);
-        console.log(pawn);
-        pawn.type = 'queen';
-        pawn.walk = queenWalk;
-        domEngine.createQueen(id);
-    },
-    castling: function(kingId, rookId) {
-        const king = figureForId(kingId);
-        const rook = figureForId(rookId);
-
-        if (king.moveCount > 0) return false;
-        if (rook.moveCount > 0) return false;
-        
-        const side = rook.x == 1 ? 'left' : rook.x == 8 ? 'right' : null;
-        const team = king.team;
-
-        if (team == 'black') {
-            if (side == 'left') {
-                if (gameMap[7][1] != null || gameMap[7][2] != null || gameMap[7][3] != null) return false;
-                if (shahsMap[7][1].includes('w') || shahsMap[7][2].includes('w') || shahsMap[7][3].includes('w') || shahsMap[7][4].includes('w')) return false;
-
-                rook.walk('c48');
-                king.castling('c38');
-            } else {
-                if (gameMap[7][5] != null || gameMap[7][6] != null) return false;
-                if (shahsMap[7][4].includes('w') || shahsMap[7][5].includes('w') || shahsMap[7][6].includes('w')) return false;
-
-                rook.walk('c68');
-                king.castling('c78');
-            }
-        } else {
-            if (side == 'right') {
-                if (gameMap[0][5] != null || gameMap[0][6] != null) return false;
-                if (shahsMap[0][4].includes('b') || shahsMap[0][5].includes('b') || shahsMap[0][6].includes('b')) return false;
-
-                rook.walk('c61');
-                king.castling('c71');
-            } else {
-                if (gameMap[0][1] != null || gameMap[0][2] != null || gameMap[0][3] != null) return false;
-                if (shahsMap[0][1].includes('b') || shahsMap[0][2].includes('b') || shahsMap[0][3].includes('b') || shahsMap[0][4].includes('b')) return false;
-
-                rook.walk('c41');
-                king.castling('c31');
-            }
-        }
-
-        return true;
-    },
-};
 
 let shahsMap = [['1','2','3','4','5','6','7','8'],
                   ['9','10','11','12','13','14','15','16'],
@@ -1270,7 +1156,6 @@ const shahsObj = {
         this._refreshWhiteShahs();
     },
     checkWhiteShah: function() {
-        shahsObj.refreshAllShahs();
         const kingId = 29;
         const king = figureForId(kingId);
         let index = getIndexOnShahsMap(kingId);
@@ -1287,36 +1172,9 @@ const shahsObj = {
 
         if (shahsMap[index[1] - 1][index[0] - 1].includes('b')) {
             gameState.whiteShah = true;
-            console.log('Шах белым!');
-            return true;
+            alert('Шах белым!');
         } else {
             gameState.whiteShah = false;
-            return false;
-        }
-    },
-    checkBlackShah: function() {
-        shahsObj.refreshAllShahs();
-        const kingId = 5;
-        const king = figureForId(kingId);
-        let index = getIndexOnShahsMap(kingId);
-
-        function getIndexOnShahsMap(id) {
-            for (let i = 0; i < 8; i++) {
-                for (let j = 0; j < 8; j++) {
-                    if (parseInt(shahsMap[i][j]) == id) {
-                        return `${j + 1}${i + 1}`;
-                    }
-                }
-            }
-        }
-
-        if (shahsMap[index[1] - 1][index[0] - 1].includes('w')) {
-            gameState.blackShah = true;
-            console.log('Шах черным!');
-            return true;
-        } else {
-            gameState.blackShah = false;
-            return false;
         }
     },
 };
@@ -1344,33 +1202,10 @@ function CreateFigure(id) {
                 const cellX = Number(cellNumber[1]);
                 const cellY = Number(cellNumber[2]);
 
-                if (this.team == 'black' && this.moveCount == 0 && this.y - 2 == cellY && cellX == this.x && gameMap[cellY - 1][cellX - 1] == null) {
-                    gameMap[this.y - 1][this.x - 1] = null;
-                    this.y--;
-                    this.y--;
-                    gameMap[this.y - 1][this.x - 1] = this;
-                    this.moveCount++;
-                    this.superStep = true;
-                    domEngine.replaceFigure(this.id, Number(String(cellX) + String(cellY)));
-                    return true;
-                }
-
                 if (this.team == 'black' && this.y - 1 == cellY && cellX == this.x && gameMap[cellY - 1][cellX - 1] == null) {
                     gameMap[this.y - 1][this.x - 1] = null;
                     this.y--;
                     gameMap[this.y - 1][this.x - 1] = this;
-                    this.moveCount++;
-                    domEngine.replaceFigure(this.id, Number(String(cellX) + String(cellY)));
-                    return true;
-                }
-
-                if (this.team == 'white' && this.moveCount == 0 && this.y + 2 == cellY && cellX == this.x && gameMap[cellY - 1][cellX - 1] == null) {
-                    gameMap[this.y - 1][this.x - 1] = null;
-                    this.y++;
-                    this.y++;
-                    gameMap[this.y - 1][this.x - 1] = this;
-                    this.moveCount++;
-                    this.superStep = true;
                     domEngine.replaceFigure(this.id, Number(String(cellX) + String(cellY)));
                     return true;
                 }
@@ -1379,7 +1214,6 @@ function CreateFigure(id) {
                     gameMap[this.y - 1][this.x - 1] = null;
                     this.y++;
                     gameMap[this.y - 1][this.x - 1] = this;
-                    this.moveCount++;
                     domEngine.replaceFigure(this.id, Number(String(cellX) + String(cellY)));
                     return true;
                 }
@@ -1396,7 +1230,6 @@ function CreateFigure(id) {
                     this.y--;
                     this.x = cellX;
                     gameMap[this.y - 1][this.x - 1] = this;
-                    this.moveCount++;
                     domEngine.replaceFigure(this.id, Number(String(cellX) + String(cellY)));
                     return true;
                 }
@@ -1407,59 +1240,12 @@ function CreateFigure(id) {
                     this.y++;
                     this.x = cellX;
                     gameMap[this.y - 1][this.x - 1] = this;
-                    this.moveCount++;
                     domEngine.replaceFigure(this.id, Number(String(cellX) + String(cellY)));
                     return true;
                 }
 
                 return false;
-            };
-            this.taking = function(cellNumber) {
-                const cellX = Number(cellNumber[1]);
-                const cellY = Number(cellNumber[2]);
-
-                // ПРОПИСАТЬ В ОБРАБОТЧИКЕ УСЛОВИЕ, ЧТОБЫ ВЗЯТИЕ НЕ БЫЛО ВОЗМОЖНЫМ ПОСЛЕ ОДНОГО ХОДА ОЖИДАНИЯ
-
-                if (this.team == 'white' && (gameMap[cellY - 1 - 1][cellX - 1] != null && gameMap[cellY - 1 - 1][cellX - 1].team == 'black' && gameMap[cellY - 1 - 1][cellX - 1].type == 'pawn' && gameMap[cellY - 1 - 1][cellX - 1].superStep == true && gameMap[cellY - 1 - 1][cellX - 1].moveCount == 1) ) {
-                    
-                    gameMap[cellY - 1 - 1][cellX - 1].death();
-                    gameMap[this.y - 1][this.x - 1] = null;
-                    
-                    if (this.x - 1 == cellX) {
-                        this.x -= 1;
-                        this.y++;
-                    } else {
-                        this.x += 1;
-                        this.y++;
-                    }
-
-                    gameMap[this.y - 1][this.x - 1] = this;
-                    this.moveCount++;
-                    domEngine.replaceFigure(this.id, Number(String(cellX) + String(cellY)));
-                    return true;
-                }
-
-                if (this.team == 'black' && (gameMap[cellY - 1 + 1][cellX - 1] != null && gameMap[cellY - 1 + 1][cellX - 1].team == 'white' && gameMap[cellY - 1 + 1][cellX - 1].type == 'pawn' && gameMap[cellY - 1 + 1][cellX - 1].superStep == true && gameMap[cellY - 1 + 1][cellX - 1].moveCount == 1) ) {
-                    
-                    gameMap[cellY - 1 + 1][cellX - 1].death();
-                    gameMap[this.y - 1][this.x - 1] = null;
-                    
-                    if (this.x - 1 == cellX) {
-                        this.x -= 1;
-                        this.y--;
-                    } else {
-                        this.x += 1;
-                        this.y--;
-                    }
-
-                    gameMap[this.y - 1][this.x - 1] = this;
-                    this.moveCount++;
-                    domEngine.replaceFigure(this.id, Number(String(cellX) + String(cellY)));
-                    return true;
-                }
-
-                return false;
-            };
+            }
             break;
         case 'rook': 
             this.walk = function(cellNumber) {
@@ -1499,7 +1285,6 @@ function CreateFigure(id) {
                     this.x = cellX;
                     this.y = cellY;
                     gameMap[this.y - 1][this.x - 1] = this;
-                    this.moveCount++;
                     domEngine.replaceFigure(this.id, Number(String(cellX) + String(cellY)));
 
                     return true;
@@ -1579,7 +1364,67 @@ function CreateFigure(id) {
             }
         break;
         case 'queen': 
-            this.walk = queenWalk;
+            this.walk = function(cellNumber) {
+                const cellX = Number(cellNumber[1]);
+                const cellY = Number(cellNumber[2]);
+
+                if ( ((Math.abs(this.x - cellX) == Math.abs(this.y - cellY)) || (this.x == cellX || this.y == cellY)) && ((gameMap[cellY - 1][cellX - 1] == null) || (gameMap[cellY - 1][cellX - 1].team != this.team && gameMap[cellY - 1][cellX - 1].type != 'king'))) {
+
+                    if (this.x == cellX) {
+                        if (this.y > cellY) {
+                            for (let i = this.y - 1; i > cellY; i--) {
+                                if (gameMap[i - 1][this.x - 1] != null) return false;
+                            }
+                        } else if (this.y < cellY) {
+                            for (let i = this.y + 1; i < cellY; i++) {
+                                if (gameMap[i - 1][this.x - 1] != null) return false;
+                            }
+                        }
+                    } else if (this.y == cellY) {
+                        if (this.x > cellX) {
+                            for (let i = this.x - 1; i > cellX; i--) {
+                                if (gameMap[this.y - 1][i - 1] != null) return false;
+                            }
+                        } else if (this.x < cellX) {
+                            for (let i = this.x + 1; i < cellX; i++) {
+                                if (gameMap[this.y - 1][i - 1] != null) return false;
+                            }
+                        }
+                    }
+
+                    if (this.y > cellY) {
+                        if (this.x > cellX) {
+                            for (let i = this.x - 1, j = this.y - 1; i > cellX && j > cellY; i--, j--) {
+                                if (gameMap[j - 1][i - 1] != null) return false;
+                            }
+                        } else if (this.x < cellX){
+                            for (let i = this.x + 1, j = this.y - 1; i < cellX && j > cellY; i++, j--) {
+                                if (gameMap[j - 1][i - 1] != null) return false;
+                                const cellX = Number(cellNumber[1]);
+                                const cellY = Number(cellNumber[2]);         if (gameMap[j - 1][i - 1] != null) return false;
+                            }
+                        } else if (this.x < cellX) {
+                            for (let i = this.x + 1, j = this.y + 1; i < cellX && j < cellY; i++, j++ ) {
+                                if (gameMap[j - 1][i - 1] != null) return false;
+                            }
+                        }
+                    }
+
+                    if (gameMap[cellY - 1][cellX - 1] != null) {
+                        gameMap[cellY - 1][cellX - 1].death();
+                    }
+
+                    gameMap[this.y - 1][this.x - 1] = null;
+                    this.x = cellX;
+                    this.y = cellY;
+                    gameMap[this.y - 1][this.x - 1] = this;
+                    domEngine.replaceFigure(this.id, Number(String(cellX) + String(cellY)));
+
+                    return true;
+                }
+
+                return false;
+            }
         break;
         case 'king':
             delete this.death;
@@ -1598,6 +1443,18 @@ function CreateFigure(id) {
                      (this.x - 1 == cellX && this.y - 1 == cellY)) && 
                      ((gameMap[cellY - 1][cellX - 1] == null) || (gameMap[cellY - 1][cellX - 1].team != this.team && gameMap[cellY - 1][cellX - 1].type != 'king')) ) {
 
+                        // if ( (this.x == enemyKing.x && this.y + 2 == enemyKing.y) ||
+                        //      (this.x == enemyKing.x && this.y - 2 == enemyKing.y) ||
+                        //      (this.y == enemyKing.y && this.x + 2 == enemyKing.x) ||
+                        //      (this.y == enemyKing.y && this.x - 2 == enemyKing.x) ||
+                        //      (this.x + 2 == enemyKing.x && this.y + 2 == enemyKing.y) ||
+                        //      (this.x - 2 == enemyKing.x && this.y + 2 == enemyKing.y) ||
+                        //      (this.x + 2 == enemyKing.x && this.y - 2 == enemyKing.y) ||
+                        //      (this.x - 2 == enemyKing.x && this.y - 2 == enemyKing.y))  {
+                        //          console.log("конфликт королей");
+                        //          return false;
+                        // }
+
                         if (gameMap[cellY - 1][cellX - 1] != null) {
                             gameMap[cellY - 1][cellX - 1].death();
                         }
@@ -1606,7 +1463,6 @@ function CreateFigure(id) {
                         this.x = cellX;
                         this.y = cellY;
                         gameMap[this.y - 1][this.x - 1] = this;
-                        this.moveCount++;
                         domEngine.replaceFigure(this.id, Number(String(cellX) + String(cellY)));
     
                         return true;
@@ -1614,18 +1470,7 @@ function CreateFigure(id) {
                 }
 
                 return false;
-            };
-            this.castling = function(cellNumber) {
-                const cellX = Number(cellNumber[1]);
-                const cellY = Number(cellNumber[2]);
-
-                gameMap[this.y - 1][this.x - 1] = null;
-                this.x = cellX;
-                this.y = cellY;
-                gameMap[this.y - 1][this.x - 1] = this;
-                this.moveCount++;
-                domEngine.replaceFigure(this.id, Number(String(cellX) + String(cellY)));
-            };
+            }
         break;
     }
 }
