@@ -79,42 +79,13 @@ function removeAllEvents() {
     }
 }
 
-function checkAllMatesAndPats() {
-    shahsObj.refreshAllShahs();
-    if (mateObj.isMate('black')) {
-        removeAllEvents();
-        alert('Мат черным!');
-        alert('Победили белые!');
-        domEngine.makeBothNotRed();
-        return;
-    }
-    if (mateObj.isPat('black')) {
-        removeAllEvents();
-        alert('Пат');
-        domEngine.makeBothNotRed();
-        return;
-    }
-    if (mateObj.isMate('white')) {
-        removeAllEvents();
-        alert('Мат белым!');
-        alert('Победили черные');
-        domEngine.makeBothNotRed();
-        return;
-    }
-    if (mateObj.isPat('white')) {
-        removeAllEvents();
-        alert('Пат');
-        domEngine.makeBothNotRed();
-        return;
-    }
-}
+
 
 
 // ------------------------------------------------ Логика игры
 
 function whiteChoiceFigure() {
     console.log('Работает1');
-    checkAllMatesAndPats();
     const whitePawnsId = [17,18,19,20,21,22,23,24];
     if (!this.children[0]) return false;
     if (this.children[0].classList[0] != 'white-team') return false;
@@ -194,7 +165,6 @@ function whiteChoiceBattleCell () {
 
 function blackChoiceFigure() {
     console.log('Работает3');
-    checkAllMatesAndPats();
     const blackPawnsId = [9,10,11,12,13,14,15,16];
     if (!this.children[0]) return false;
     if (this.children[0].classList[0] != 'black-team') return false;
