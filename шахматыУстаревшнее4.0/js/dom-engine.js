@@ -63,11 +63,4 @@ const domEngine = {
 
         text2.classList.add('red');
     },
-    makeBothNotRed: function() {
-        const text = document.querySelector('.first');
-        const text2 = document.querySelector('.second');
-
-        text.className = text.className.replace('red', '');
-        text2.className = text.className.replace('red', '');
-    },
 };

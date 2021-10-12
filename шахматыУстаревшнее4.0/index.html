@@ -88,11 +88,18 @@
     <script src="js/chess.js"></script>
     <script src="js/events.js"></script>
     <script>
-        const willDeath = [1,2,3,4,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,26,27,28,30,31,32];
-
-        for (let i of willDeath) {
-            figureForId(i).death();
-        }
+        // const targetCell = 'c47';
+        // for (let i = 1; i <= 16; i++) {
+        //     const currentFigure = figureForId(i);
+        //     console.log(`Ход ${i}`);
+        //     if (currentFigure.type == 'pawn') {
+        //         currentFigure.walk(targetCell);
+        //         currentFigure.kill(targetCell);
+        //         currentFigure.taking(targetCell);
+        //     } else {
+        //         currentFigure.walk(targetCell);
+        //     }
+        // }
     </script>
 </body>
 </html>

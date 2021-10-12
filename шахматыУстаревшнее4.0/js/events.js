@@ -124,13 +124,6 @@ function whiteChoiceBattleCell () {
                     removeAllEvents();
                     alert('Мат черным!');
                     alert('Победили белые!');
-                    domEngine.makeBothNotRed();
-                    return;
-                }
-                if (mateObj.isPat('black')) {
-                    removeAllEvents();
-                    alert('Пат');
-                    domEngine.makeBothNotRed();
                     return;
                 }
                 addBlackChoiceFigure();
@@ -149,13 +142,6 @@ function whiteChoiceBattleCell () {
                 removeAllEvents();
                 alert('Мат черным!');
                 alert('Победили белые!');
-                domEngine.makeBothNotRed();
-                return;
-            }
-            if (mateObj.isPat('black')) {
-                removeAllEvents();
-                alert('Пат');
-                domEngine.makeBothNotRed();
                 return;
             }
             addBlackChoiceFigure();
@@ -203,13 +189,6 @@ function blackChoiceBattleCell () {
                     removeAllEvents();
                     alert('Мат белым!');
                     alert('Победили черные');
-                    domEngine.makeBothNotRed();
-                    return;
-                }
-                if (mateObj.isPat('white')) {
-                    removeAllEvents();
-                    alert('Пат');
-                    domEngine.makeBothNotRed();
                     return;
                 }
                 addWhiteChoiceFigure();
@@ -228,13 +207,6 @@ function blackChoiceBattleCell () {
                 removeAllEvents();
                 alert('Мат белым!');
                 alert('Победили черные');
-                domEngine.makeBothNotRed();
-                return;
-            }
-            if (mateObj.isPat('white')) {
-                removeAllEvents();
-                alert('Пат');
-                domEngine.makeBothNotRed();
                 return;
             }
             addWhiteChoiceFigure();

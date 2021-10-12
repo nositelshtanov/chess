@@ -1375,91 +1375,6 @@ const mateObj = {
 
         return true;
     },
-    isPat: function(team) {
-        shahsObj.refreshAllShahs();
-
-        const figures = team == 'white' ? [17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] : [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
-        const king = team == 'white' ? figureForId(29) : figureForId(5);
-        const shahSymbol = team == 'white' ? 'b' : 'w';
-        const alienTeam = team == 'white' ? 'black' : 'white';
-
-        const shahsMapX = king.x - 1;
-        const shahsMapY = king.y - 1;
-
-        if (shahsMap[shahsMapY][shahsMapX].includes(shahSymbol)) return false;
-        if (!this.isPotentialMate(team)) return false;
-
-        for (let figureId of figures) {
-            const figure = figureForId(figureId);
-            if (figure == null) continue;
-            const oldCell = `c${figure.x}${figure.y}`;
-
-            for (let i = 1; i <= 8; i++) {
-                for (let j = 1; j <= 8; j++) {
-                    const cell = `c${i}${j}`;
-
-                    let alienCheck = false;
-
-                    shahsObj.refreshAllShahs();
-
-                    if (figureForCell(cell) != null && figureForCell(cell).team == alienTeam) {
-                        alienCheck = true;
-                    }
-
-                    if (figure.type == 'pawn') {
-                        if (figure.walk(cell) || figure.kill(cell) || figure.taking(cell)) {
-                            shahsObj.refreshAllShahs();
-                            if (!shahsMap[shahsMapY][shahsMapX].includes(shahSymbol)) {
-                                figure.back(oldCell);
-                                if (alienCheck) {
-                                    killed[killed.length - 1].reborn();
-                                }
-                                return false;
-                            } else {
-                                figure.back(oldCell);
-                                if (alienCheck) {
-                                    killed[killed.length - 1].reborn();
-                                }
-                            }
-                        }
-                    } else if (figure.type == 'king') {
-                        if (figure.walk(cell)) {
-                            shahsObj.refreshAllShahs();
-                            console.log(shahsMap);
-                            if (!shahsMap[figure.y - 1][figure.x - 1].includes(shahSymbol)) {
-                                figure.walk(oldCell);
-                                if (alienCheck) {
-                                    killed[killed.length - 1].reborn();
-                                }
-                                return false;
-                            } else {
-                                figure.walk(oldCell);
-                                if (alienCheck) {
-                                    killed[killed.length - 1].reborn();
-                                }
-                            }
-                        }
-                    } else if (figure.walk(cell)) {
-                        shahsObj.refreshAllShahs();
-                        if (!shahsMap[shahsMapY][shahsMapX].includes(shahSymbol)) {
-                            figure.walk(oldCell);
-                            if (alienCheck) {
-                                killed[killed.length - 1].reborn();
-                            }
-                            return false;
-                        } else {
-                            figure.walk(oldCell);
-                            if (alienCheck) {
-                                killed[killed.length - 1].reborn();
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        return true;
-    },
     isMate: function(team) {
         shahsObj.refreshAllShahs();
 
@@ -1477,7 +1392,6 @@ const mateObj = {
 
         for (let figureId of figures) {
             const figure = figureForId(figureId);
-            if (figure == null) continue;
             const oldCell = `c${figure.x}${figure.y}`;
 
             for (let i = 1; i <= 8; i++) {
