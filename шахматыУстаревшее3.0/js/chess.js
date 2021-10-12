@@ -1,4 +1,3 @@
-
 const f1  = new CreateFigure(1),
       f2  = new CreateFigure(2), 
       f3  = new CreateFigure(3), 
@@ -37,7 +36,7 @@ function queenWalk(cellNumber) {
     const cellX = Number(cellNumber[1]);
     const cellY = Number(cellNumber[2]);
 
-    if ( ((Math.abs(this.x - cellX) == Math.abs(this.y - cellY)) || (this.x == cellX || this.y == cellY)) && ((gameMap[cellY - 1][cellX - 1] == null) || (gameMap[cellY - 1]?.[cellX - 1].team != this.team && gameMap[cellY - 1]?.[cellX - 1].type != 'king'))) {
+    if ( ((Math.abs(this.x - cellX) == Math.abs(this.y - cellY)) || (this.x == cellX || this.y == cellY)) && ((gameMap[cellY - 1][cellX - 1] == null) || (gameMap[cellY - 1][cellX - 1].team != this.team && gameMap[cellY - 1][cellX - 1].type != 'king'))) {
 
         if (this.x == cellX) {
             if (this.y > cellY) {
@@ -201,12 +200,7 @@ function figureForId(id) {
             }
         }
     }
-}  
-
-function figureForCell(cell) {
-    return gameMap[cell[2] - 1][cell[1] - 1];
-}
-
+}        
 
 const shahsObj = {
     refreshShahsMap: function() {
@@ -1354,122 +1348,6 @@ const shahsObj = {
     },
 };
 
-const mateObj = {
-    isPotentialMate: function(team) {
-        const king = team == 'white' ? figureForId(29) : figureForId(5);
-        const shahSymbol = team == 'white' ? 'b' : 'w';
-
-        const shahsMapX = king.x - 1;
-        const shahsMapY = king.y - 1;
-
-        // if (!shahsMap[shahsMapY][shahsMapX].includes(shahSymbol)) return false;
-
-        if (shahsMap[shahsMapY + 1]?.[shahsMapX - 1] && !(shahsMap[shahsMapY + 1]?.[shahsMapX - 1].includes(shahSymbol) || gameMap[shahsMapY + 1]?.[shahsMapX - 1] != null)) return false;
-        if (shahsMap[shahsMapY + 1]?.[shahsMapX] && !(shahsMap[shahsMapY + 1]?.[shahsMapX].includes(shahSymbol) || gameMap[shahsMapY + 1]?.[shahsMapX] != null)) return false;
-        if (shahsMap[shahsMapY + 1]?.[shahsMapX + 1] && !(shahsMap[shahsMapY + 1]?.[shahsMapX + 1].includes(shahSymbol) || gameMap[shahsMapY + 1]?.[shahsMapX + 1] != null)) return false;
-        if (shahsMap[shahsMapY]?.[shahsMapX - 1] && !(shahsMap[shahsMapY]?.[shahsMapX - 1].includes(shahSymbol) || gameMap[shahsMapY]?.[shahsMapX - 1] != null)) return false;
-        if (shahsMap[shahsMapY]?.[shahsMapX + 1] && !(shahsMap[shahsMapY]?.[shahsMapX + 1].includes(shahSymbol) || gameMap[shahsMapY]?.[shahsMapX + 1] != null)) return false;
-        if (shahsMap[shahsMapY - 1]?.[shahsMapX - 1] && !(shahsMap[shahsMapY - 1]?.[shahsMapX - 1].includes(shahSymbol) || gameMap[shahsMapY - 1]?.[shahsMapX - 1] != null)) return false;
-        if (shahsMap[shahsMapY - 1]?.[shahsMapX] && !(shahsMap[shahsMapY - 1]?.[shahsMapX].includes(shahSymbol) || gameMap[shahsMapY - 1]?.[shahsMapX] != null)) return false;
-        if (shahsMap[shahsMapY - 1]?.[shahsMapX + 1] && !(shahsMap[shahsMapY - 1]?.[shahsMapX + 1].includes(shahSymbol) || gameMap[shahsMapY - 1]?.[shahsMapX + 1] != null)) return false; 
-
-        return true;
-    },
-    isMate: function(team) {
-        shahsObj.refreshAllShahs();
-
-        const king = team == 'white' ? figureForId(29) : figureForId(5);
-        const shahSymbol = team == 'white' ? 'b' : 'w';
-        const alienTeam = team == 'white' ? 'black' : 'white';
-
-        const shahsMapX = king.x - 1;
-        const shahsMapY = king.y - 1;
-
-        if (!shahsMap[shahsMapY][shahsMapX].includes(shahSymbol)) return false;
-        if (!this.isPotentialMate(team)) return false;
-
-        const figures = team == 'white' ? [17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32] : [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];
-
-        for (let figureId of figures) {
-            const figure = figureForId(figureId);
-            const oldCell = `c${figure.x}${figure.y}`;
-
-            for (let i = 1; i <= 8; i++) {
-                for (let j = 1; j <= 8; j++) {
-                    const cell = `c${i}${j}`;
-                    
-                    // console.log(cell);
-                    // console.log(oldCell, 'старая клетка');
-                    let alienCheck = false;
-
-                    shahsObj.refreshAllShahs();
-
-                    if (figureForCell(cell) != null && figureForCell(cell).team == alienTeam) {
-                        alienCheck = true;
-                    }
-
-                    // let friendCheck = false;
-
-                    // if ((figureForCell(cell) != null) && (figureForCell(cell).team == team)) {
-                    //     friendCheck = true;
-                    // }
-
-                    if (figure.type == 'pawn') {
-                        if (figure.walk(cell) || figure.kill(cell) || figure.taking(cell)) {
-                            shahsObj.refreshAllShahs();
-                            if (!shahsMap[shahsMapY][shahsMapX].includes(shahSymbol)) {
-                                figure.back(oldCell);
-                                if (alienCheck) {
-                                    killed[killed.length - 1].reborn();
-                                }
-                                return false;
-                            } else {
-                                figure.back(oldCell);
-                                if (alienCheck) {
-                                    killed[killed.length - 1].reborn();
-                                }
-                            }
-                        }
-                    } else if (figure.type == 'king') {
-                        if (figure.walk(cell)) {
-                            shahsObj.refreshAllShahs();
-                            console.log(shahsMap);
-                            if (!shahsMap[figure.y - 1][figure.x - 1].includes(shahSymbol)) {
-                                figure.walk(oldCell);
-                                if (alienCheck) {
-                                    killed[killed.length - 1].reborn();
-                                }
-                                return false;
-                            } else {
-                                figure.walk(oldCell);
-                                if (alienCheck) {
-                                    killed[killed.length - 1].reborn();
-                                }
-                            }
-                        }
-                    } else if (figure.walk(cell)) {
-                        shahsObj.refreshAllShahs();
-                        if (!shahsMap[shahsMapY][shahsMapX].includes(shahSymbol)) {
-                            figure.walk(oldCell);
-                            if (alienCheck) {
-                                killed[killed.length - 1].reborn();
-                            }
-                            return false;
-                        } else {
-                            figure.walk(oldCell);
-                            if (alienCheck) {
-                                killed[killed.length - 1].reborn();
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        return true;
-    },
-};
-
 function CreateFigure(id) {
     let figureElement = document.getElementById(`f${id}`);
     let type = figureElement.classList[1];
@@ -1499,24 +1377,24 @@ function CreateFigure(id) {
                 const cellX = Number(cellNumber[1]);
                 const cellY = Number(cellNumber[2]);
 
-                if (this.team == 'black' && this.moveCount == 0 && this.y - 2 == cellY && cellX == this.x && gameMap[cellY - 1]?.[cellX - 1] == null) {
+                if (this.team == 'black' && this.moveCount == 0 && this.y - 2 == cellY && cellX == this.x && gameMap[cellY - 1][cellX - 1] == null) {
                     gameMap[this.y - 1][this.x - 1] = null;
                     this.y--;
                     this.y--;
                     gameMap[this.y - 1][this.x - 1] = this;
                     this.moveCount++;
                     this.superStep = true;
-                    if (gameMap[this.y - 1]?.[this.x - 1 - 1] != null && gameMap[this.y - 1]?.[this.x - 1 - 1].team == 'white' && gameMap[this.y - 1]?.[this.x - 1 - 1].type == 'pawn') {
+                    if (gameMap[this.y - 1][this.x - 1 - 1] != null && gameMap[this.y - 1][this.x - 1 - 1].team == 'white' && gameMap[this.y - 1][this.x - 1 - 1].type == 'pawn') {
                         this.canTaked = true;
                     }
-                    if (gameMap[this.y - 1]?.[this.x - 1 + 1] != null && gameMap[this.y - 1]?.[this.x - 1 + 1].team == 'white' && gameMap[this.y - 1]?.[this.x - 1 + 1].type == 'pawn') {
+                    if (gameMap[this.y - 1][this.x - 1 + 1] != null && gameMap[this.y - 1][this.x - 1 + 1].team == 'white' && gameMap[this.y - 1][this.x - 1 + 1].type == 'pawn') {
                         this.canTaked = true;
                     }
                     domEngine.replaceFigure(this.id, Number(String(cellX) + String(cellY)));
                     return true;
                 }
 
-                if (this.team == 'black' && this.y - 1 == cellY && cellX == this.x && gameMap[cellY - 1]?.[cellX - 1] == null) {
+                if (this.team == 'black' && this.y - 1 == cellY && cellX == this.x && gameMap[cellY - 1][cellX - 1] == null) {
                     gameMap[this.y - 1][this.x - 1] = null;
                     this.y--;
                     gameMap[this.y - 1][this.x - 1] = this;
@@ -1525,24 +1403,24 @@ function CreateFigure(id) {
                     return true;
                 }
 
-                if (this.team == 'white' && this.moveCount == 0 && this.y + 2 == cellY && cellX == this.x && gameMap[cellY - 1]?.[cellX - 1] == null) {
+                if (this.team == 'white' && this.moveCount == 0 && this.y + 2 == cellY && cellX == this.x && gameMap[cellY - 1][cellX - 1] == null) {
                     gameMap[this.y - 1][this.x - 1] = null;
                     this.y++;
                     this.y++;
                     gameMap[this.y - 1][this.x - 1] = this;
                     this.moveCount++;
                     this.superStep = true;
-                    if (gameMap[this.y - 1]?.[this.x - 1 - 1] != null && gameMap[this.y - 1]?.[this.x - 1 - 1].team == 'black' && gameMap[this.y - 1]?.[this.x - 1 - 1].type == 'pawn') {
+                    if (gameMap[this.y - 1][this.x - 1 - 1] != null && gameMap[this.y - 1][this.x - 1 - 1].team == 'black' && gameMap[this.y - 1][this.x - 1 - 1].type == 'pawn') {
                         this.canTaked = true;
                     }
-                    if (gameMap[this.y - 1]?.[this.x - 1 + 1] != null && gameMap[this.y - 1]?.[this.x - 1 + 1].team == 'black' && gameMap[this.y - 1]?.[this.x - 1 + 1].type == 'pawn') {
+                    if (gameMap[this.y - 1][this.x - 1 + 1] != null && gameMap[this.y - 1][this.x - 1 + 1].team == 'black' && gameMap[this.y - 1][this.x - 1 + 1].type == 'pawn') {
                         this.canTaked = true;
                     }
                     domEngine.replaceFigure(this.id, Number(String(cellX) + String(cellY)));
                     return true;
                 }
 
-                if (this.team == 'white' && this.y + 1 == cellY && cellX == this.x && gameMap[cellY - 1]?.[cellX - 1] == null) {
+                if (this.team == 'white' && this.y + 1 == cellY && cellX == this.x && gameMap[cellY - 1][cellX - 1] == null) {
                     gameMap[this.y - 1][this.x - 1] = null;
                     this.y++;
                     gameMap[this.y - 1][this.x - 1] = this;
@@ -1557,7 +1435,7 @@ function CreateFigure(id) {
                 const cellX = Number(cellNumber[1]);
                 const cellY = Number(cellNumber[2]);
 
-                if (this.team == 'black' && (gameMap[cellY - 1]?.[cellX - 1] != null && gameMap[cellY - 1]?.[cellX - 1]?.team == 'white') && (this.x - 1 == cellX || this.x + 1 == cellX) && (this.y - 1 == cellY) && gameMap[cellY - 1]?.[cellX - 1]?.type != 'king') {
+                if (this.team == 'black' && (gameMap[cellY - 1][cellX - 1] != null && gameMap[cellY - 1][cellX - 1].team == 'white') && (this.x - 1 == cellX || this.x + 1 == cellX) && (this.y - 1 == cellY) && gameMap[cellY - 1][cellX - 1].type != 'king') {
                     gameMap[cellY - 1][cellX - 1].death();
                     gameMap[this.y - 1][this.x - 1] = null;
                     this.y--;
@@ -1568,7 +1446,7 @@ function CreateFigure(id) {
                     return true;
                 }
 
-                if (this.team == 'white' && (gameMap[cellY - 1]?.[cellX - 1] != null && gameMap[cellY - 1]?.[cellX - 1]?.team == 'black') && (this.x - 1 == cellX || this.x + 1 == cellX) && (this.y + 1 == cellY) && gameMap[cellY - 1]?.[cellX - 1]?.type != 'king') {
+                if (this.team == 'white' && (gameMap[cellY - 1][cellX - 1] != null && gameMap[cellY - 1][cellX - 1].team == 'black') && (this.x - 1 == cellX || this.x + 1 == cellX) && (this.y + 1 == cellY) && gameMap[cellY - 1][cellX - 1].type != 'king') {
                     gameMap[cellY - 1][cellX - 1].death();
                     gameMap[this.y - 1][this.x - 1] = null;
                     this.y++;
@@ -1587,7 +1465,7 @@ function CreateFigure(id) {
 
                 // ПРОПИСАТЬ В ОБРАБОТЧИКЕ УСЛОВИЕ, ЧТОБЫ ВЗЯТИЕ НЕ БЫЛО ВОЗМОЖНЫМ ПОСЛЕ ОДНОГО ХОДА ОЖИДАНИЯ
 
-                if (this.team == 'white' && (gameMap[cellY - 1 - 1]?.[cellX - 1] != null && gameMap[cellY - 1 - 1]?.[cellX - 1]?.team == 'black' && gameMap[cellY - 1 - 1]?.[cellX - 1]?.type == 'pawn' && gameMap[cellY - 1 - 1]?.[cellX - 1]?.superStep == true && gameMap[cellY - 1 - 1]?.[cellX - 1]?.moveCount == 1) && gameMap[cellY - 1 - 1]?.[cellX - 1]?.canTaked) {
+                if (this.team == 'white' && (gameMap[cellY - 1 - 1][cellX - 1] != null && gameMap[cellY - 1 - 1][cellX - 1].team == 'black' && gameMap[cellY - 1 - 1][cellX - 1].type == 'pawn' && gameMap[cellY - 1 - 1][cellX - 1].superStep == true && gameMap[cellY - 1 - 1][cellX - 1].moveCount == 1) && gameMap[cellY - 1 - 1][cellX - 1].canTaked) {
                     
                     gameMap[cellY - 1 - 1][cellX - 1].death();
                     gameMap[this.y - 1][this.x - 1] = null;
@@ -1606,7 +1484,7 @@ function CreateFigure(id) {
                     return true;
                 }
 
-                if (this.team == 'black' && (gameMap[cellY - 1 + 1]?.[cellX - 1] != null && gameMap[cellY - 1 + 1]?.[cellX - 1]?.team == 'white' && gameMap[cellY - 1 + 1]?.[cellX - 1]?.type == 'pawn' && gameMap[cellY - 1 + 1]?.[cellX - 1]?.superStep == true && gameMap[cellY - 1 + 1]?.[cellX - 1]?.moveCount == 1) && gameMap[cellY - 1 + 1]?.[cellX - 1]?.canTaked) {
+                if (this.team == 'black' && (gameMap[cellY - 1 + 1][cellX - 1] != null && gameMap[cellY - 1 + 1][cellX - 1].team == 'white' && gameMap[cellY - 1 + 1][cellX - 1].type == 'pawn' && gameMap[cellY - 1 + 1][cellX - 1].superStep == true && gameMap[cellY - 1 + 1][cellX - 1].moveCount == 1) && gameMap[cellY - 1 + 1][cellX - 1].canTaked) {
                     
                     gameMap[cellY - 1 + 1][cellX - 1].death();
                     gameMap[this.y - 1][this.x - 1] = null;
@@ -1645,7 +1523,7 @@ function CreateFigure(id) {
                 const cellX = Number(cellNumber[1]);
                 const cellY = Number(cellNumber[2]);
 
-                if ( (this.x == cellX || this.y == cellY) && (gameMap[cellY - 1]?.[cellX - 1] == null || (gameMap[cellY - 1]?.[cellX - 1]?.team != this.team && gameMap[cellY - 1]?.[cellX - 1]?.type != 'king'))) {
+                if ( (this.x == cellX || this.y == cellY) && (gameMap[cellY - 1][cellX - 1] == null || (gameMap[cellY - 1][cellX - 1].team != this.team && gameMap[cellY - 1][cellX - 1].type != 'king'))) {
                     const target = gameMap[cellY - 1][cellX - 1];
 
                     if (this.x == cellX) {
@@ -1693,10 +1571,10 @@ function CreateFigure(id) {
                 const cellY = Number(cellNumber[2]);
 
                 if (((Math.abs(cellX - this.x) == 1 && Math.abs(cellY - this.y) == 2 ) || (Math.abs(cellX - this.x) == 2 && Math.abs(cellY - this.y) == 1 )) && 
-                    (gameMap[cellY - 1]?.[cellX - 1] == null || ((gameMap[cellY - 1]?.[cellX - 1]?.team != this.team) && gameMap[cellY - 1]?.[cellX - 1]?.type != 'king'))) {
+                    (gameMap[cellY - 1][cellY - 1] == null || ((gameMap[cellY - 1][cellX - 1].team != this.team) && gameMap[cellY - 1][cellX - 1].type != 'king'))) {
 
-                    if (gameMap[cellY - 1]?.[cellX - 1] != null) {
-                        gameMap[cellY - 1]?.[cellX - 1].death();
+                    if (gameMap[cellY - 1][cellX - 1] != null) {
+                        gameMap[cellY - 1][cellX - 1].death();
                     }
 
                     gameMap[this.y - 1][this.x - 1] = null;
@@ -1717,7 +1595,7 @@ function CreateFigure(id) {
                 const cellY = Number(cellNumber[2]);
 
                 if ( (Math.abs(this.x - cellX) == Math.abs(this.y - cellY)) &&
-                     ((gameMap[cellY - 1]?.[cellX - 1] == null) || (gameMap[cellY - 1]?.[cellX - 1]?.team != this.team && gameMap[cellY - 1]?.[cellX - 1]?.type != 'king') )) {
+                     ((gameMap[cellY - 1][cellX - 1] == null) || (gameMap[cellY - 1][cellX - 1].team != this.team && gameMap[cellY - 1][cellX - 1].type != 'king') )) {
 
                         if (this.y > cellY) {
                             if (this.x > cellX) {
@@ -1781,10 +1659,10 @@ function CreateFigure(id) {
                      (this.x - 1 == cellX && this.y + 1 == cellY) ||
                      (this.x + 1 == cellX && this.y - 1 == cellY) ||
                      (this.x - 1 == cellX && this.y - 1 == cellY)) && 
-                     ((gameMap[cellY - 1]?.[cellX - 1] == null) || (gameMap[cellY - 1]?.[cellX - 1]?.team != this.team && gameMap[cellY - 1]?.[cellX - 1]?.type != 'king')) ) {
+                     ((gameMap[cellY - 1][cellX - 1] == null) || (gameMap[cellY - 1][cellX - 1].team != this.team && gameMap[cellY - 1][cellX - 1].type != 'king')) ) {
 
-                        if (gameMap[cellY - 1]?.[cellX - 1] != null) {
-                            gameMap[cellY - 1]?.[cellX - 1].death();
+                        if (gameMap[cellY - 1][cellX - 1] != null) {
+                            gameMap[cellY - 1][cellX - 1].death();
                         }
     
                         gameMap[this.y - 1][this.x - 1] = null;

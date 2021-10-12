@@ -79,9 +79,6 @@ function removeAllEvents() {
     }
 }
 
-
-
-
 // ------------------------------------------------ Логика игры
 
 function whiteChoiceFigure() {
@@ -120,12 +117,6 @@ function whiteChoiceBattleCell () {
                 addWhiteChoiceFigure();
                 return;
             } else {
-                if (mateObj.isMate('black')) {
-                    removeAllEvents();
-                    alert('Мат черным!');
-                    alert('Победили белые!');
-                    return;
-                }
                 addBlackChoiceFigure();
             }
         }
@@ -138,12 +129,6 @@ function whiteChoiceBattleCell () {
             addWhiteChoiceFigure();
             return;
         } else {
-            if (mateObj.isMate('black')) {
-                removeAllEvents();
-                alert('Мат черным!');
-                alert('Победили белые!');
-                return;
-            }
             addBlackChoiceFigure();
         }
     } 
@@ -185,12 +170,6 @@ function blackChoiceBattleCell () {
                 addBlackChoiceFigure();
                 return;
             } else {
-                if (mateObj.isMate('white')) {
-                    removeAllEvents();
-                    alert('Мат белым!');
-                    alert('Победили черные');
-                    return;
-                }
                 addWhiteChoiceFigure();
             }
         }
@@ -203,12 +182,6 @@ function blackChoiceBattleCell () {
             addBlackChoiceFigure();
             return;
         } else {
-            if (mateObj.isMate('white')) {
-                removeAllEvents();
-                alert('Мат белым!');
-                alert('Победили черные');
-                return;
-            }
             addWhiteChoiceFigure();
         }
     }    
